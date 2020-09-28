@@ -4,6 +4,9 @@ import SignUp from './Containers/SignUp'
 import LogIn from './Containers/LogIn'
 
 class App extends React.Component {
+  State = {
+    user: ''
+  }
 
   userCreateOrLogIn = (e, type) => {
     let endpoint
@@ -34,9 +37,11 @@ class App extends React.Component {
 
   userResponse= (response) => {
     if (response.error) {
-      console.log(response)
+      response.error.forEach(error => console.log(error))
     } else {
-      console.log(response)
+      localStorage.setItem('Token', response.jwt)
+      this.setState({user: response.user.id})
+      // localStorage.getItem('myValueInLocalStorage') || ''
     }
   }
 
