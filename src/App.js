@@ -5,7 +5,8 @@ import LogIn from './Containers/LogIn'
 
 class App extends React.Component {
   State = {
-    user: ''
+    user: '',
+    gameId:0,
   }
 
   userCreateOrLogIn = (e, type) => {
@@ -43,6 +44,23 @@ class App extends React.Component {
       this.setState({user: response.user.id})
       // localStorage.getItem('myValueInLocalStorage') || ''
     }
+  }
+
+  componentDidMount(){
+    let configObj = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/json"
+      }
+    }
+    fetch(`http://localhost:3001/games`, configObj)
+      .then(resp=> resp.json())
+      .then(json=> {
+        this.setState({
+          gameId:json.id
+        })
+      })
   }
 
   render() {
