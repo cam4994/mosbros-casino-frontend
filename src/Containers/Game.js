@@ -11,6 +11,21 @@ class Game extends Component {
         funds=0,
     }
 
+    total=(cards)=>{
+      let sum=0;
+      cards.forEach((card)=> sum+=card.trueValue)
+      return sum
+  }
+
+    hit=(player)=>{
+      if (player == "user"){
+
+      }
+    }
+
+    componentDidMount(){
+      
+    }
 
 
   render() {

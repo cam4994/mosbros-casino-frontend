@@ -1,10 +1,11 @@
 import React, { Component } from "react";
 
 class Dealer extends Component {
+
     render() {
         return (
             <div class="score">
-
+                {this.props.total(this.props.cards)}
             </div>
 
             <div class="cards">
