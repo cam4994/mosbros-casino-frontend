@@ -1,11 +1,13 @@
 import React from 'react';
 
-const SignUp = (props) => {
-
+const LogIn = (props) => {console.log(props)
     return (
       <div className="form">
-          <h2 className="formTitle">Sign Up</h2>
-          <form onSubmit={props.signUp}>
+          <h2 className="formTitle">Log In</h2>
+          <form onSubmit={(e)=> {
+              e.preventDefault()
+              props.userCreateOrLogIn(e, "Log In")
+            }}>
               <input placeholder="Username" name="username"/><br/>
               <input type="password" placeholder="Password" name="password"/><br/>
               <input type="submit" value="Sign Up"/>
@@ -14,4 +16,4 @@ const SignUp = (props) => {
     )
   }
   
-  export default SignUp
+  export default LogIn

@@ -1,11 +1,17 @@
 import React from 'react';
 import './App.css';
-import SignUp from './SignUp'
+import SignUp from './Containers/SignUp'
+import LogIn from './Containers/LogIn'
 
 class App extends React.Component {
 
-  signUp = (e) => {
-    e.preventDefault()
+  userCreateOrLogIn = (e, type) => {
+    let endpoint
+    if (type === "Sign Up") {
+      endpoint = 'users'
+    } else if (type === "Log In") {
+      endpoint = 'login'
+    }
     let username = e.target.username.value
     let password = e.target.password.value
 
@@ -21,15 +27,24 @@ class App extends React.Component {
         game_id: 1
       })
     }
-    fetch("http://localhost:3001/users", configObj)
+    fetch(`http://localhost:3001/${endpoint}`, configObj)
       .then(resp=> resp.json())
-      .then(user=> console.log(user))
+      .then(user=> this.userResponse(user))
+  }
+
+  userResponse= (response) => {
+    if (response.error) {
+      console.log(response)
+    } else {
+      console.log(response)
+    }
   }
 
   render() {
     return (
       <div className="App">
-        <SignUp signUp={this.signUp} />
+        <SignUp userCreateOrLogIn={this.userCreateOrLogIn} />
+        <LogIn userCreateOrLogIn={this.userCreateOrLogIn}/>
       </div>
     );
   }
