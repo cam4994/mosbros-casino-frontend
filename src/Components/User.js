@@ -1,6 +1,7 @@
 import React, { Component } from "react";
+import Card from "./Components/Card";
 
-class Dealer extends Component {
+class User extends Component {
     render() {
         return (
             <div class="score">
@@ -14,4 +15,4 @@ class Dealer extends Component {
     }
 }
 
-export default Dealer;
+export default User;

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Dealer from "../Components/Dealer";
+import User from "../Components/User";
 
 class Game extends Component {
   
