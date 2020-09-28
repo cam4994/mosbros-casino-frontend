@@ -1,3 +1,21 @@
+.grid-container {
+  display: grid;
+  grid-template-columns: 140px auto 140px;
+  grid-template-rows: auto;
+  grid-gap: 10px;
+  background-color: #2196F3;
+  padding: 10px;
+  width: 100vw;
+  height: 100vh;
+}
+
+.grid-container > div {
+  background-color: rgba(255, 255, 255, 0.8);
+  text-align: center;
+  padding: 20px 0;
+  font-size: 12px;
+}
+
 .App {
   text-align: center;
 }
