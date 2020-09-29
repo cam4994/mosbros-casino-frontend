@@ -1,6 +1,6 @@
 import React from 'react';
 
-const LogIn = (props) => {console.log(props)
+const LogIn = (props) => {
     return (
       <div className="login">
           <h2 className="formTitle">Log In</h2>

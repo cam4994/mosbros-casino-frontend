@@ -22,6 +22,7 @@ class App extends React.Component {
       endpoint = 'users'
     } else if (type === "Log In") {
       endpoint = 'login'
+      console.log("logging in")
     }
     let username = e.target.username.value
     let password = e.target.password.value
@@ -35,7 +36,7 @@ class App extends React.Component {
       body: JSON.stringify({
         username: username,
         password: password,
-        game_id: 1
+        game_id: this.state.gameId
       })
     }
     fetch(`http://localhost:3001/${endpoint}`, configObj)
