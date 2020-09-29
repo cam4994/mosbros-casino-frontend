@@ -1,12 +1,14 @@
 import React from 'react';
 import './App.css';
+import './Styling/card.css'
 import SignUp from './Containers/SignUp'
 import LogIn from './Containers/LogIn'
+import Card from './Components/Card'
 
 class App extends React.Component {
   State = {
     user: '',
-    gameId:0,
+    gameId: 0,
   }
 
   userCreateOrLogIn = (e, type) => {
@@ -26,27 +28,27 @@ class App extends React.Component {
         "Accept": "application/json"
       },
       body: JSON.stringify({
-        username: username,  
-        password: password, 
+        username: username,
+        password: password,
         game_id: 1
       })
     }
     fetch(`http://localhost:3001/${endpoint}`, configObj)
-      .then(resp=> resp.json())
-      .then(user=> this.userResponse(user))
+      .then(resp => resp.json())
+      .then(user => this.userResponse(user))
   }
 
-  userResponse= (response) => {
+  userResponse = (response) => {
     if (response.error) {
       response.error.forEach(error => console.log(error))
     } else {
       localStorage.setItem('Token', response.jwt)
-      this.setState({user: response.user.id})
+      this.setState({ user: response.user.id })
       // localStorage.getItem('myValueInLocalStorage') || ''
     }
   }
 
-  componentDidMount(){
+  componentDidMount() {
     let configObj = {
       method: "POST",
       headers: {
@@ -55,19 +57,41 @@ class App extends React.Component {
       }
     }
     fetch(`http://localhost:3001/games`, configObj)
-      .then(resp=> resp.json())
-      .then(json=> {
+      .then(resp => resp.json())
+      .then(json => {
         this.setState({
-          gameId:json.id
+          gameId: json.id
         })
       })
   }
 
   render() {
     return (
-      <div className="App">
-        <SignUp userCreateOrLogIn={this.userCreateOrLogIn} />
-        <LogIn userCreateOrLogIn={this.userCreateOrLogIn}/>
+      <div className="grid-container">
+        <div className="item1">
+          {/* <SignUp userCreateOrLogIn={this.userCreateOrLogIn} />
+          <LogIn userCreateOrLogIn={this.userCreateOrLogIn} /> */}
+        </div>
+        <div className="item2">
+          Put the dealer stuff here
+        </div>
+        <div className="item3">
+
+        </div>
+        <div className="item4">
+
+        </div>
+        <div className="item5">
+          <div className="playingCards">
+            <ul className="table">
+              <Card card={{suit: 'spade', color: 'black', value: '7'}} />
+              {/* <Card /> */}
+            </ul>
+          </div>
+        </div>
+        <div className="item5">
+
+        </div>
       </div>
     );
   }

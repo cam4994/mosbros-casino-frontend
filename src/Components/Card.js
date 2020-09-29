@@ -1,11 +1,33 @@
 import React, { Component } from "react";
+import '../Styling/card.css'
 
 class Card extends Component {
   render() {
+    console.log(this.props.card.suit)
+    let suit = this.props.card.suit
+    if (suit == 'diamond') {
+      suit = 'diams'
+    } else {
+      suit = suit + 's'
+    }
+
     return (
-      <div >
-        
-      </div>
+      <li>
+        <div className={`card rank-${this.props.card.value} ${suit}`}>
+          <span className="rank">{this.props.card.value}</span>
+          <span className="suit">{suit === 'diams' ? '♦' : suit === 'clubs' ? '♣' : suit === 'spades' ? '♠' : suit === 'hearts' ? '♥' : null}</span>
+        </div>
+      </li>
+      // <li>
+      //   <div class="card rank-Q diams">
+      //     <span class="rank">Q</span>
+      //     <span class="suit">&hearts;</span>
+      //   </div>
+      // </li>
+      // <li>
+      //   <div class="card back">
+      //   </div>
+      // </li>
     );
   }
 }
