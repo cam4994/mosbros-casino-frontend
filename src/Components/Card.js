@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 import '../Styling/card.css'
 
-class Card extends Component {
+export default class Card extends Component {
   render() {
     console.log(this.props.card.suit)
     let suit = this.props.card.suit
-    if (suit == 'diamond') {
+    if (suit === 'diamond') {
       suit = 'diams'
     } else {
       suit = suit + 's'
@@ -32,4 +32,3 @@ class Card extends Component {
   }
 }
 
-export default Card;
