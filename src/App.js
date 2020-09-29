@@ -7,7 +7,7 @@ import Card from './Components/Card'
 
 class App extends React.Component {
   State = {
-    user: '',
+    userId: '',
     gameId: 0,
   }
 
@@ -43,7 +43,7 @@ class App extends React.Component {
       response.error.forEach(error => console.log(error))
     } else {
       localStorage.setItem('Token', response.jwt)
-      this.setState({ user: response.user.id })
+      this.setState({ userId: response.user.id })
       // localStorage.getItem('myValueInLocalStorage') || ''
     }
   }
@@ -60,7 +60,7 @@ class App extends React.Component {
       .then(resp => resp.json())
       .then(json => {
         this.setState({
-          gameId: json.id
+          gameId: json.id, 
         })
       })
   }
