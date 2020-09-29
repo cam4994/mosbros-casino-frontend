@@ -5,8 +5,7 @@
   "d e f";
   grid-template-rows: 250px 1fr;
   grid-template-columns: 400px 1fr 400px;             
-  background-color: #2196F3;
-  padding: 10px;
+  background-color: black;
   top: 59px;
   left: 75px;
   right: 0;
@@ -23,6 +22,47 @@
   padding: 20px 0;
   font-size: 12px;
   grid-area: b;
+}
+
+.grid-container > .game {
+  grid-column-start: 1;
+  grid-column-end: 4;
+  grid-row-start: 1;
+  grid-row-end: 4;
+  background: transparent url('https://www.clowerweb.com/cors/blackjack/table.png'); 
+  background-repeat: no-repeat;
+  background-size: cover;
+  border-radius: 5px;
+}
+
+.game-container {
+  display: grid;
+  grid-template-areas: 
+  "a b c"
+  "d e f";
+  grid-template-rows: auto auto ;
+  grid-template-columns: 200px 1fr 200px;             
+  /* padding: 10px; */
+  top: 0px;
+  left: 0px;
+  right: 0;
+  bottom: 0;
+  position: absolute;
+  width: auto;
+  height: auto;
+}
+
+.dealer-container {
+  text-align: center;
+  padding: 20px 0;
+  font-size: 12px;
+  grid-area: b;
+}
+.user-container {
+  text-align: center;
+  padding: 20px 0;
+  font-size: 12px;
+  grid-area: e;
 }
 
 .App {

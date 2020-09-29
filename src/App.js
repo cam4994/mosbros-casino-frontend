@@ -1,9 +1,7 @@
 import React from 'react';
 import './App.css';
-import './Styling/card.css'
 import SignUp from './Containers/SignUp'
 import LogIn from './Containers/LogIn'
-import Card from './Components/Card'
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import NavBar from './Components/NavBar';
@@ -13,7 +11,7 @@ import Game from './Containers/Game';
 
 class App extends React.Component {
   state = {
-    userId: '',
+    userId: 0,
     gameId: 0,
   }
 
@@ -65,21 +63,21 @@ class App extends React.Component {
     }
     fetch(`http://localhost:3001/games`, configObj)
       .then(resp => resp.json())
-      .then(json => { 
+      .then(json => {
         this.setState({
-          gameId: json.id, 
+          gameId: json.id,
         })
       })
   }
 
-  render() { 
+  render() {
     return (
       <React.Fragment>
         <Router>
           <NavBar />
           <SideBar />
-          <div className="grid-container">
-            <Switch>
+          <Switch>
+            <div className="grid-container">
               <Route exact path="/" />
               <Route exact path="/about" component={About} />
               <Route exact path="/login" render={(props) => (
@@ -91,8 +89,8 @@ class App extends React.Component {
               <Route exact path="/game" render={(props) => (
                 <Game gameId={this.state.gameId} userId={this.state.userId} />
               )} />
-            </Switch>
-          </div>
+            </div>
+          </Switch>
         </Router>
       </React.Fragment>
       // <div className="grid-container">

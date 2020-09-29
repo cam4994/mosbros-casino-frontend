@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import styled from 'styled-components';
 
 const NavIcon = styled.div`
+font-size: 12px;
 `;
 
 const StyledNavItem = styled.div`
@@ -30,7 +31,7 @@ export default class NavItem extends React.Component {
         return (
             <StyledNavItem active={active}>
                 <Link to={this.props.path} className={this.props.css} onClick={this.handleClick}>
-                    <NavIcon></NavIcon>
+                    <NavIcon>{this.props.name}</NavIcon>
                 </Link>
             </StyledNavItem>
         );

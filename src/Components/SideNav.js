@@ -21,19 +21,19 @@ export default class SideNav extends React.Component {
         items: [
             {
                 path: '/', /* path is used as id to check which NavItem is active basically */
-                // name: 'Home',
+                name: 'Home',
                 css: 'fa fa-fw fa-home',
                 key: 1
             },
             {
                 path: '/about',
-                // name: 'About',
-                css: 'fa fa-fw fa-clock',
+                name: 'About',
+                css: 'fas fa-info-circle',
                 key: 2
             },
               {
                 path: '/game',
-                // name: 'NoMatch',
+                name: 'Start Game',
                 css: 'fas fa-play-circle',
                 key: 3
               },
@@ -49,7 +49,7 @@ export default class SideNav extends React.Component {
                 {
                     this.state.items.map((item) => {
                         return (
-                            <NavItem path={item.path} css={item.css} clickHandler={this.clickHandler} active={item.path === this.state.activePath} key={item.key} />
+                            <NavItem path={item.path} name ={item.name} css={item.css} clickHandler={this.clickHandler} active={item.path === this.state.activePath} key={item.key} />
                         )
                     })
                 }
