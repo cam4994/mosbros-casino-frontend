@@ -10,14 +10,10 @@ export default class Game extends Component {
         gameResult: "none",
         dealerCards: [],
         userCards: [],
+        dealerTotal:0,
+        userTotal:0,
         funds: 0,
     }
-
-    total=(cards)=>{
-      let sum=0;
-      cards.forEach((card)=> sum+=card.rank)
-      return sum
-  }
 
   stay=()=>{
     /* begin dealer's turn */
@@ -41,33 +37,38 @@ export default class Game extends Component {
           move: player+" hit"
         })
       }
+      /* update cards and total for dealer or user after they hit*/
       fetch(`http://localhost:3001/games/${this.props.gameId}`, configObj)
         .then(resp => resp.json())
-        .then(cards => {
-          if (cards[0].owner_type === "Dealer"){
+        .then(data=> {
+          if (player == "dealer"){
             this.setState({
-              dealerCards: cards
+              dealerCards: data.cards,
+              dealerTotal: data.player.score
             })
           } else {
             this.setState({
-              userCards: cards
+              userCards: data.cards,
+              userTotal: data.player.score
             })
           }
         })
     }
 
-    getCards=(player)=>{
+    getInitialCards=(player)=>{
       
         fetch(`http://localhost:3001/${player}/${this.props.userId}`)
         .then(resp => resp.json())
-        .then(cards => {
+        .then(data => {
           if (player === "users"){
             this.setState({
-              userCards: cards
+              userCards: data.cards,
+              userTotal: data.player.score
             })
           } else {
             this.setState({
-              dealerCards: cards
+              dealerCards: data.cards,
+              dealerTotal: data.player.score
             })
           }
         })
@@ -96,16 +97,16 @@ export default class Game extends Component {
         }))
 
       /* Do initial fetch to get two user cards and two dealer cards */
-      this.getCards("users")
-      this.getCards("dealers")
+      this.getInitialCards("users")
+      this.getInitialCards("dealers")
     }
 
 
   render() {
     return (
       <div className="game">
-        {/* <Dealer hit={this.hit} cards={this.state.dealerCards}/>
-        <User hit={this.hit} cards={this.state.userCards} stay={this.stay}/> */}
+        <Dealer hit={this.hit} cards={this.state.dealerCards}/>
+        <User hit={this.hit} cards={this.state.userCards} stay={this.stay}/>
         <h1>Game Mode</h1>
       </div>
     );
