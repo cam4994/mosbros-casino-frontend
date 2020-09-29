@@ -9,9 +9,10 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import NavBar from './Components/NavBar';
 import { About } from './Components/About';
 import SideBar from './Components/SideBar';
+import Game from './Containers/Game';
 
 class App extends React.Component {
-  State = {
+  state = {
     userId: '',
     gameId: 0,
   }
@@ -64,14 +65,14 @@ class App extends React.Component {
     }
     fetch(`http://localhost:3001/games`, configObj)
       .then(resp => resp.json())
-      .then(json => {
+      .then(json => { 
         this.setState({
           gameId: json.id, 
         })
       })
   }
 
-  render() {
+  render() { 
     return (
       <React.Fragment>
         <Router>
@@ -86,6 +87,9 @@ class App extends React.Component {
               )} />
               <Route exact path="/signup" render={(props) => (
                 <SignUp userCreateOrLogIn={this.userCreateOrLogIn} />
+              )} />
+              <Route exact path="/game" render={(props) => (
+                <Game gameId={this.state.gameId} userId={this.state.userId} />
               )} />
             </Switch>
           </div>

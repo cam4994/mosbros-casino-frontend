@@ -3,14 +3,14 @@ import Dealer from "../Components/Dealer";
 import User from "../Components/User";
 import Winner from "../Components/Winner";
 
-class Game extends Component {
+export default class Game extends Component {
   
     state={
-        gameState="",
-        gameResult="none",
-        dealerCards=[],
-        userCards=[],
-        funds=0,
+        gameState: "",
+        gameResult: "none",
+        dealerCards: [],
+        userCards: [],
+        funds: 0,
     }
 
     total=(cards)=>{
@@ -44,7 +44,7 @@ class Game extends Component {
       fetch(`http://localhost:3001/games/${this.props.gameId}`, configObj)
         .then(resp => resp.json())
         .then(cards => {
-          if (cards[0].owner_type == "Dealer"){
+          if (cards[0].owner_type === "Dealer"){
             this.setState({
               dealerCards: cards
             })
@@ -61,7 +61,7 @@ class Game extends Component {
         fetch(`http://localhost:3001/${player}/${this.props.userId}`)
         .then(resp => resp.json())
         .then(cards => {
-          if (player == "users"){
+          if (player === "users"){
             this.setState({
               userCards: cards
             })
@@ -103,13 +103,12 @@ class Game extends Component {
 
   render() {
     return (
-      <div >
-        <Dealer hit={this.hit} cards={this.state.dealerCards}/>
-        <User hit={this.hit} cards={this.state.userCards} stay={this.stay}/>
-
+      <div className="game">
+        {/* <Dealer hit={this.hit} cards={this.state.dealerCards}/>
+        <User hit={this.hit} cards={this.state.userCards} stay={this.stay}/> */}
+        <h1>Game Mode</h1>
       </div>
     );
   }
 }
 
-export default Game;
