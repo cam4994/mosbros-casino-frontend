@@ -4,6 +4,11 @@ import './Styling/card.css'
 import SignUp from './Containers/SignUp'
 import LogIn from './Containers/LogIn'
 import Card from './Components/Card'
+import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import NavBar from './Components/NavBar';
+import { About } from './Components/About';
+import SideBar from './Components/SideBar';
 
 class App extends React.Component {
   State = {
@@ -17,6 +22,7 @@ class App extends React.Component {
       endpoint = 'users'
     } else if (type === "Log In") {
       endpoint = 'login'
+      console.log("logging in")
     }
     let username = e.target.username.value
     let password = e.target.password.value
@@ -30,7 +36,7 @@ class App extends React.Component {
       body: JSON.stringify({
         username: username,
         password: password,
-        game_id: 1
+        game_id: this.state.gameId
       })
     }
     fetch(`http://localhost:3001/${endpoint}`, configObj)
@@ -67,32 +73,34 @@ class App extends React.Component {
 
   render() {
     return (
-      <div className="grid-container">
-        <div className="item1">
-          {/* <SignUp userCreateOrLogIn={this.userCreateOrLogIn} />
-          <LogIn userCreateOrLogIn={this.userCreateOrLogIn} /> */}
-        </div>
-        <div className="item2">
-          Put the dealer stuff here
-        </div>
-        <div className="item3">
-
-        </div>
-        <div className="item4">
-
-        </div>
-        <div className="item5">
-          <div className="playingCards">
-            <ul className="table">
-              <Card card={{suit: 'spade', color: 'black', value: '7'}} />
-              {/* <Card /> */}
-            </ul>
+      <React.Fragment>
+        <Router>
+          <NavBar />
+          <SideBar />
+          <div className="grid-container">
+            <Switch>
+              <Route exact path="/" />
+              <Route exact path="/about" component={About} />
+              <Route exact path="/login" render={(props) => (
+                <LogIn userCreateOrLogIn={this.userCreateOrLogIn} />
+              )} />
+              <Route exact path="/signup" render={(props) => (
+                <SignUp userCreateOrLogIn={this.userCreateOrLogIn} />
+              )} />
+            </Switch>
           </div>
-        </div>
-        <div className="item5">
-
-        </div>
-      </div>
+        </Router>
+      </React.Fragment>
+      // <div className="grid-container">
+      //   <div className="item5">
+      //     <div className="playingCards">
+      //       <ul className="table">
+      //         <Card card={{suit: 'spade', color: 'black', value: '7'}} />
+      //         {/* <Card /> */}
+      //       </ul>
+      //     </div>
+      //   </div>
+      // </div>
     );
   }
 }
