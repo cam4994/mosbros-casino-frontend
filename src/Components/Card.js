@@ -3,7 +3,6 @@ import '../Styling/card.css'
 
 export default class Card extends Component {
   render() {
-    console.log(this.props.card.suit)
     let suit = this.props.card.suit
     if (suit === 'diamond') {
       suit = 'diams'

@@ -11,7 +11,7 @@ class Dealer extends Component {
                 </div>
 
                 <div className="cards">
-                    {this.props.cards.map((card) => <Card card={card} />)}
+                    {this.props.cards.map((card) => <Card key={card.id} card={card} />)}
                 </div>
             </div>
         );

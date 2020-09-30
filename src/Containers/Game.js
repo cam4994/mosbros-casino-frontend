@@ -56,19 +56,28 @@ export default class Game extends Component {
     }
 
     getInitialCards=(player)=>{
-      
-        fetch(`http://localhost:3001/${player}/${this.props.userId}`)
+        let id=0
+        if (player=== "users"){
+          id=this.props.userId
+        } else {
+          id=this.props.gameId
+        }
+        console.log(id)
+        console.log(player)
+        fetch(`http://localhost:3001/${player}/${id}`)
         .then(resp => resp.json())
         .then(data => {
-          console.log(this.props.userId)
-          console.log(player)
           console.log(data)
           if (player === "users"){
+            console.log('player score')
+            console.log(data.player.score)
             this.setState({
               userCards: data.cards,
               userTotal: data.player.score
             })
           } else {
+            console.log('dealer score')
+            console.log(data.player.score)
             this.setState({
               dealerCards: data.cards,
               dealerTotal: data.player.score
