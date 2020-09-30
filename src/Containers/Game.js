@@ -36,7 +36,10 @@ export default class Game extends Component {
 
     /* Do initial fetch to get two user cards and two dealer cards */
     this.getInitialCards("users")
-    this.getInitialCards("dealers")
+    setTimeout(()=>{
+      this.getInitialCards("dealers")
+    }, 2000)
+    
   }
   stay = () => {
     /* begin dealer's turn */
@@ -108,27 +111,6 @@ export default class Game extends Component {
           }
         })
     }
-
-    fetch(`http://localhost:3001/${player}/${this.props.userId}`)
-      .then(resp => resp.json())
-      .then(data => {
-        console.log(this.props.userId)
-        console.log(player)
-        console.log(data)
-        if (player === "users") {
-          this.setState({
-            userCards: data.cards,
-            userTotal: data.player.score
-          })
-        } else {
-          this.setState({
-            dealerCards: data.cards,
-            dealerTotal: data.player.score
-          })
-        }
-      })
-  }
-
 
   render() {
     return (
