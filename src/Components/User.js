@@ -21,7 +21,11 @@ class User extends Component {
                 </div>
 
                 <div className="cards">
-                    {this.props.cards.map((card) => <Card key={card.id} card={card} />)}
+                    <div className="playingCards">
+                        <ul className="table">
+                            {this.props.cards.map((card) => <Card key={card.id} card={card} />)}
+                        </ul>
+                    </div>
                 </div>
 
                 <div className="move">

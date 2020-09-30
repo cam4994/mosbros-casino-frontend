@@ -9,7 +9,7 @@ const StyledSideNav = styled.div`
   width: 75px;     /* Set the width of the sidebar */
   z-index: 1;      
   top: 3.4em;      
-  background-color: #222; 
+  background-color: black; 
   overflow-x: hidden;     /* Disable horizontal scroll */
   padding-top: 10px;
 `;
