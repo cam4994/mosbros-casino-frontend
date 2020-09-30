@@ -35,10 +35,10 @@ export default class Game extends Component {
       }))
 
     /* Do initial fetch to get two user cards and two dealer cards */
-    this.getInitialCards("users")
-    setTimeout(()=>{
+    setTimeout(()=> {
+      this.getInitialCards("users")
       this.getInitialCards("dealers")
-    }, 2000) 
+    }, 1000)
   }
   stay = () => {
     /* begin dealer's turn */
