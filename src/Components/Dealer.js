@@ -7,7 +7,7 @@ class Dealer extends Component {
         return (
             <div className="dealer">
                 <div className="score">
-                    {this.props.total(this.props.cards)}
+                    {this.props.total}
                 </div>
 
                 <div className="cards">
