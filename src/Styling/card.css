@@ -13,7 +13,7 @@
     padding: .25em;
     margin: 0 .5em .5em 0;
     text-align: center;
-    font-size: 1.6em; /* @change: adjust this value to make bigger or smaller cards */
+    font-size: 2.4em; /* @change: adjust this value to make bigger or smaller cards */
     font-weight: normal;
     font-family: Arial, sans-serif;
     position: relative;
@@ -52,22 +52,18 @@
 
 /* top left main info (rank and suit) */
 
-.playingCards .card .rank,
+.playingCards .card .rank, 
 .playingCards .card .suit {
     display: block;
-    line-height: 1;
+    line-height: .8;
     text-align: left;
-}
-
-.playingCards .card .suit {
-    line-height: .7;
 }
 
 
 /* inner multiple suits */
 .playingCards .card .suit:after {
     display: block;
-    margin-top: -.8em;
+    margin-top: -.2em;
     text-align: center;
     white-space: pre;
     line-height: .9;
@@ -80,7 +76,7 @@
     word-spacing: -.15em;
 }
 .playingCards .card.hearts.rank-10 .suit:after {
-    word-spacing: -.05em;
+    word-spacing: -.13em;
     letter-spacing: -.1em;
 }
 .playingCards .card.clubs.rank-10 .suit:after {

@@ -14,7 +14,8 @@ export default class Card extends Component {
       <li>
         <div className={`card rank-${this.props.card.value} ${suit}`}>
           <span className="rank">{this.props.card.value}</span>
-          <span className="suit">{suit === 'diams' ? '♦' : suit === 'clubs' ? '♣' : suit === 'spades' ? '♠' : suit === 'hearts' ? '♥' : null}</span>
+          <span className="suit"></span>
+          {/* <span className="suit">{suit === 'diams' ? '♦' : suit === 'clubs' ? '♣' : suit === 'spades' ? '♠' : suit === 'hearts' ? '♥' : null}</span> */}
         </div>
       </li>
       // <li>
