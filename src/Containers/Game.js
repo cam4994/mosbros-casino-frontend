@@ -38,7 +38,7 @@ export default class Game extends Component {
     this.getInitialCards("users")
     setTimeout(()=>{
       this.getInitialCards("dealers")
-    }, 2000)
+    }, 2000) 
   }
   stay = () => {
     /* begin dealer's turn */
@@ -110,7 +110,6 @@ export default class Game extends Component {
           }
         })
     }
-
 
   render() {
     return (
