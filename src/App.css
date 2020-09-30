@@ -14,16 +14,60 @@
   width: auto;
   height: auto;
 }
+.grid-container > .home-container {
+  grid-column-start: 1;
+  grid-column-end: 4;
+  grid-row-start: 1;
+  grid-row-end: 4;
+  background-image: url(https://www.downtowngrand.com/wp-content/uploads/2018/10/blackjack-1600x891.jpg);
+}
+.grid-container > .home-page{
+  grid-area: b;
+  color: red;
+  text-align: center;
+}
+.about-page {
+  background-color: rgba(255, 255, 255, 0.8);
+  width: 400px;
+  height: 200px;
+  border-collapse: collapse;
+  overflow: hidden;
+  text-align: center;
+  font-family: 'Grandstander';
+  border-radius: 20px;
+  margin: auto;
+  margin-top: 5%;
+  box-shadow: 0 0 20px rgba(0,0,0,0.1);
+  padding: 20px 0;
+  font-size: 22px;
+  opacity: 0.7;
+}
 
-.grid-container > .signUp, 
-.grid-container > .login, 
-.grid-container > .about-page {
+.login, .signUp {
+  background-color: rgba(255, 255, 255, 0.8);
+  width: 400px;
+  height: 200px;
+  border-collapse: collapse;
+  overflow: hidden;
+  text-align: center;
+  font-family: 'Grandstander';
+  border-radius: 20px;
+  margin: auto;
+  margin-top: 5%;
+  box-shadow: 0 0 20px rgba(0,0,0,0.1);
+  padding: 20px 0;
+  font-size: 22px;
+  opacity: 0.7;
+}
+/* .grid-container > .home-container > .signUp, 
+.grid-container > .home-container > .login, 
+.grid-container > .home-container > .about-page {
   background-color: rgba(255, 255, 255, 0.8);
   text-align: center;
   padding: 20px 0;
   font-size: 12px;
   grid-area: b;
-}
+} */
 
 .grid-container > .game {
   grid-column-start: 1;

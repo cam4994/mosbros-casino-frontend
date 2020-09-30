@@ -1,5 +1,6 @@
 import React from 'react';
 import { Nav, Navbar, Form, FormControl } from 'react-bootstrap';
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import styled from 'styled-components';
 
 const Styles = styled.div`
@@ -19,8 +20,8 @@ const Styles = styled.div`
   }
   .form-center {
     position: absolute !important;
-    left: 25%;
-    right: 25%;
+    left: 35%;
+    right: 35%;
   }
 `;
 
@@ -34,8 +35,8 @@ const Styles = styled.div`
       </Form>
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="ml-auto">
-          <Nav.Item><Nav.Link href="/signup">Sign Up</Nav.Link></Nav.Item> 
-          <Nav.Item><Nav.Link href="/login">Log In</Nav.Link></Nav.Item>
+          <Nav.Item><Nav.Link as={Link} to="/signup"> Sign Up</Nav.Link></Nav.Item> 
+          <Nav.Item><Nav.Link as={Link} to="/login">Log In</Nav.Link></Nav.Item>
         </Nav>
       </Navbar.Collapse>
     </Navbar>
