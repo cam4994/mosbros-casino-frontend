@@ -15,6 +15,12 @@
   height: auto;
 }
 
+.grid-container > .home-page{
+  grid-area: b;
+  color: red;
+  text-align: center;
+}
+
 .grid-container > .signUp, 
 .grid-container > .login, 
 .grid-container > .about-page {
