@@ -11,7 +11,11 @@ class Dealer extends Component {
                 </div>
 
                 <div className="cards">
-                    {this.props.cards.map((card) => <Card card={card} />)}
+                    <div className="playingCards">
+                        <ul className="table">
+                            {this.props.cards.map((card) => <Card card={card} />)}
+                        </ul>
+                    </div>
                 </div>
             </div>
         );

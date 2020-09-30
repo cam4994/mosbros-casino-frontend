@@ -1,5 +1,5 @@
 import React from 'react';
-import { Nav, Navbar, Form, FormControl } from 'react-bootstrap';
+import { Nav, Navbar } from 'react-bootstrap';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import styled from 'styled-components';
 
@@ -8,20 +8,15 @@ const Styles = styled.div`
     position: fixed;
     width: 100vw;
   }
-  .navbar { background-color: #222; }
+  .navbar { background-color: black; }
   a, .navbar-nav, .navbar-light .nav-link {
-    color: #9FFFCB;
+    color: #f20e12;
     &:hover { color: white; }
   }
   .navbar-brand {
-    font-size: 1.4em;
-    color: #9FFFCB;
+    font-size: 1.5em;
+    color: #f20e12;
     &:hover { color: white; }
-  }
-  .form-center {
-    position: absolute !important;
-    left: 35%;
-    right: 35%;
   }
 `;
 
@@ -29,10 +24,6 @@ const Styles = styled.div`
   <Styles>
     <Navbar expand="lg">
       <Navbar.Brand href="/">Mos Bros Casino</Navbar.Brand>
-      <Navbar.Toggle aria-controls="basic-navbar-nav"/>
-      <Form className="form-center">
-        <FormControl type="text" placeholder="Search" className="" />
-      </Form>
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="ml-auto">
           <Nav.Item><Nav.Link as={Link} to="/signup"> Sign Up</Nav.Link></Nav.Item> 

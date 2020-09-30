@@ -15,6 +15,24 @@ class App extends React.Component {
     userId: 0,
     gameId: 0,
   }
+  componentDidMount() {
+    
+    let configObj = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/json"
+      }
+    }
+    fetch(`http://localhost:3001/games`, configObj)
+      .then(resp => resp.json())
+      .then(json => {
+        console.log(json.id)
+        this.setState({
+          gameId: json.id,
+        })
+      })
+  }
 
   userCreateOrLogIn = (e, type) => {
     let endpoint
@@ -53,25 +71,6 @@ class App extends React.Component {
     }
   }
 
-  componentDidMount() {
-    
-    let configObj = {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Accept": "application/json"
-      }
-    }
-    fetch(`http://localhost:3001/games`, configObj)
-      .then(resp => resp.json())
-      .then(json => {
-        console.log(json.id)
-        this.setState({
-          gameId: json.id,
-        })
-      })
-  }
-
   render() {
     return (
       <React.Fragment>
@@ -88,7 +87,7 @@ class App extends React.Component {
               <Route exact path="/signup" render={(props) => (
                 <SignUp userCreateOrLogIn={this.userCreateOrLogIn} />
               )} />
-              <Route exact path="/game" render={(props) => (this.state.gameId == 0 ? <LogIn userCreateOrLogIn={this.userCreateOrLogIn} /> : <Game gameId={this.state.gameId} userId={this.state.userId} />
+              <Route exact path="/game" render={(props) => (this.state.gameId === 0 || this.state.userId === 0 ? <LogIn userCreateOrLogIn={this.userCreateOrLogIn} /> : <Game gameId={this.state.gameId} userId={this.state.userId} />
               )} />
             </div>
           </Switch>
