@@ -5,7 +5,7 @@
   "d e f";
   grid-template-rows: 250px 1fr;
   grid-template-columns: 400px 1fr 400px;             
-  background-color: black;
+  /* background-color: black; */
   top: 59px;
   left: 75px;
   right: 0;
@@ -16,7 +16,8 @@
 }
 
 .grid-container > .signUp, 
-.grid-container > .login {
+.grid-container > .login, 
+.grid-container > .about-page {
   background-color: rgba(255, 255, 255, 0.8);
   text-align: center;
   padding: 20px 0;
@@ -102,4 +103,21 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+* { box-sizing: border-box; }
+.video-background {
+  background: #000;
+  position: fixed;
+  top: 0; right: 0; bottom: 0; left: 0;
+  z-index: -99;
+}
+.video-foreground,
+.video-background iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
 }

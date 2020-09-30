@@ -5,7 +5,8 @@ import LogIn from './Containers/LogIn'
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import NavBar from './Components/NavBar';
-import { About } from './Components/About';
+import About from './Components/About';
+import Home from './Components/Home';
 import SideBar from './Components/SideBar';
 import Game from './Containers/Game';
 
@@ -21,7 +22,6 @@ class App extends React.Component {
       endpoint = 'users'
     } else if (type === "Log In") {
       endpoint = 'login'
-      console.log("logging in")
     }
     let username = e.target.username.value
     let password = e.target.password.value
@@ -47,9 +47,9 @@ class App extends React.Component {
     if (response.error) {
       response.error.forEach(error => console.log(error))
     } else {
+      console.log(response)
       localStorage.setItem('Token', response.jwt)
       this.setState({ userId: response.user.id })
-      // localStorage.getItem('myValueInLocalStorage') || ''
     }
   }
 
@@ -78,7 +78,7 @@ class App extends React.Component {
           <SideBar />
           <Switch>
             <div className="grid-container">
-              <Route exact path="/" />
+              <Route exact path="/" component={Home}/>
               <Route exact path="/about" component={About} />
               <Route exact path="/login" render={(props) => (
                 <LogIn userCreateOrLogIn={this.userCreateOrLogIn} />
