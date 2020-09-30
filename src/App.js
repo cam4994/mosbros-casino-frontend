@@ -54,6 +54,7 @@ class App extends React.Component {
   }
 
   componentDidMount() {
+    
     let configObj = {
       method: "POST",
       headers: {
@@ -64,6 +65,7 @@ class App extends React.Component {
     fetch(`http://localhost:3001/games`, configObj)
       .then(resp => resp.json())
       .then(json => {
+        console.log(json.id)
         this.setState({
           gameId: json.id,
         })

@@ -86,7 +86,8 @@ export default class Game extends Component {
           "Accept": "application/json"
         },
         body: JSON.stringify({
-          move: "start"
+          move: "start",
+          user: this.props.userId
         })
       }
       fetch(`http://localhost:3001/games/${this.props.gameId}`, configObj)
