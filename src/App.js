@@ -78,7 +78,7 @@ class App extends React.Component {
           <SideBar />
           <Switch>
             <div className="grid-container">
-              <Route exact path="/" component={Home}/>
+              <Route exact path="/" component={Home} />
               <Route exact path="/about" component={About} />
               <Route exact path="/login" render={(props) => (
                 <LogIn userCreateOrLogIn={this.userCreateOrLogIn} />
@@ -86,7 +86,7 @@ class App extends React.Component {
               <Route exact path="/signup" render={(props) => (
                 <SignUp userCreateOrLogIn={this.userCreateOrLogIn} />
               )} />
-              <Route exact path="/game" render={(props) => ( this.state.gameId==0 ? <LogIn userCreateOrLogIn={this.userCreateOrLogIn} /> : <Game gameId={this.state.gameId} userId={this.state.userId} />
+              <Route exact path="/game" render={(props) => (this.state.gameId == 0 ? <LogIn userCreateOrLogIn={this.userCreateOrLogIn} /> : <Game gameId={this.state.gameId} userId={this.state.userId} />
               )} />
             </div>
           </Switch>

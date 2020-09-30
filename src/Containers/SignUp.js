@@ -1,6 +1,7 @@
 import React from 'react';
 
 const SignUp = (props) => (
+  <div className="home-container">
     <div className="signUp">
       <h2 className="formTitle">Sign Up</h2>
       <form onSubmit={(e) => {
@@ -12,6 +13,7 @@ const SignUp = (props) => (
         <input type="submit" value="Sign Up" />
       </form>
     </div>
+  </div>
 )
 
 export default SignUp
