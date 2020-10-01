@@ -6,9 +6,8 @@ import Winner from "../Components/Winner";
 export default class Game extends Component {
 
   state = {
+    showDealerScore:false,
     bust: "",
-    gameState: "",
-    gameResult: "none",
     dealerCards: [],
     userCards: [],
     dealerTotal: 0,
@@ -29,11 +28,7 @@ export default class Game extends Component {
       })
     }
     fetch(`http://localhost:3001/games/${this.props.gameId}`, configObj)
-      .then(resp => resp.json())
-      .then(turnResult => this.setState({
-        gameState: turnResult.gameState,
-        gameResult: turnResult.result
-      }))
+      
 
     /* Do initial fetch to get two user cards and two dealer cards */
     setTimeout(() => {
@@ -44,6 +39,9 @@ export default class Game extends Component {
           this.hit("user")
           setTimeout(() => {
             this.hit("dealer")
+            // setTimeout(() => {
+            //   this.checkForBlackJack()
+            // }, 1500)
           }, 1500)
         }, 1500)
       }, 1500)
@@ -54,18 +52,26 @@ export default class Game extends Component {
 
   dealerTurn = () => {
     /* begin dealer's turn */
-    if (this.state.dealerTotal < 17) {
-      this.hit("dealer")
-      setTimeout(() => {
-        this.dealerTurn()
-      }, 2000)
-    } else {
-      if (this.state.dealerTotal > 21) {
-        this.bust("dealer")
+    this.setState({
+      showDealerScore:true
+    })
+
+    setTimeout(()=>{
+      if (this.state.dealerTotal < 17) {
+        this.hit("dealer")
+        setTimeout(() => {
+          this.dealerTurn()
+        }, 1000)
       } else {
-        this.dealerStay()
+        if (this.state.dealerTotal > 21) {
+          this.bust("dealer")
+        } else {
+          this.dealerStay()
+        }
       }
-    }
+    }, 1000)
+
+    
   }
 
   dealerStay = () => {
@@ -185,7 +191,7 @@ export default class Game extends Component {
       <div className="game">
         <div className="game-container">
           <div className="dealer-container">
-            <Dealer hit={this.hit} cards={this.state.dealerCards} total={this.state.dealerTotal} />
+            <Dealer showDealerScore={this.state.showDealerScore} hit={this.hit} cards={this.state.dealerCards} total={this.state.dealerTotal} />
           </div>
           <div className="user-container">
             <User userTurn={this.userTurn} cards={this.state.userCards} dealerTurn={this.dealerTurn} total={this.state.userTotal} />
