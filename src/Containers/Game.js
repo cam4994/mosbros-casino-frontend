@@ -143,8 +143,12 @@ export default class Game extends Component {
               userTotal: data.player.score
             })
           } else {
+            let dealer_card= data.cards[0]
+            dealer_card.hide = true 
+            dealer_card = [dealer_card]
+            console.log(dealer_card)
             this.setState({
-              dealerCards: data.cards,
+              dealerCards: dealer_card,
               dealerTotal: data.player.score
             })
           }
