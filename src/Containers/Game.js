@@ -6,6 +6,7 @@ import Winner from "../Components/Winner";
 export default class Game extends Component {
 
   state = {
+    bust:"",
     gameState: "",
     gameResult: "none",
     dealerCards: [],
@@ -51,9 +52,28 @@ export default class Game extends Component {
   }
 
   
-  stay = () => {
+  dealerTurn = () => {
     /* begin dealer's turn */
+    if (this.state.dealerTotal<17){
+      this.hit("dealer")
+      setTimeout(()=>{
+        this.dealerTurn()
+      },2000)
+    } else {
+      if (this.state.dealerTotal>21){
+        this.bust("dealer")
+      } else {
+        this.dealerStay()
+      }
+    }
+  }
 
+  dealerStay =() =>{
+    console.log('dealer will stay')
+  }
+
+  bust=(player)=>{
+    console.log(`${player} busted`)
   }
 
   /* callback function for dealer and user components */
@@ -78,15 +98,31 @@ export default class Game extends Component {
       .then(resp => resp.json())
       .then(data => {
         if (player === "dealer") {
-          this.setState({
-            dealerCards: data.cards,
-            dealerTotal: data.player.score
-          })
+          if (data.bust=="dealer"){
+            this.setState({
+              bust:"dealer",
+              dealerCards: data.cards,
+              dealerTotal: data.player.score
+            })
+          } else {
+            this.setState({
+              dealerCards: data.cards,
+              dealerTotal: data.player.score
+            })
+          }
         } else {
-          this.setState({
-            userCards: data.cards,
-            userTotal: data.player.score
-          })
+          if (data.bust=="user"){
+            this.setState({
+              bust:"user",
+              userCards: data.cards,
+              userTotal: data.player.score
+            })
+          }else {
+            this.setState({
+              userCards: data.cards,
+              userTotal: data.player.score
+            })
+          }
         }
       })
   }
@@ -98,22 +134,15 @@ export default class Game extends Component {
         } else {
           id=this.props.gameId
         }
-        console.log(id)
-        console.log(player)
         fetch(`http://localhost:3001/${player}/${id}`)
         .then(resp => resp.json())
         .then(data => {
-          console.log(data)
           if (player === "users"){
-            console.log('player score')
-            console.log(data.player.score)
             this.setState({
               userCards: data.cards,
               userTotal: data.player.score
             })
           } else {
-            console.log('dealer score')
-            console.log(data.player.score)
             this.setState({
               dealerCards: data.cards,
               dealerTotal: data.player.score
@@ -130,7 +159,7 @@ export default class Game extends Component {
             <Dealer hit={this.hit} cards={this.state.dealerCards} total={this.state.dealerTotal} />
           </div>
           <div className="user-container">
-            <User hit={this.hit} cards={this.state.userCards} stay={this.stay} total={this.state.userTotal} />
+            <User hit={this.hit} cards={this.state.userCards} dealerTurn={this.dealerTurn} total={this.state.userTotal} />
           </div>
         </div>
       </div>
