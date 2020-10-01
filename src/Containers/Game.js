@@ -8,6 +8,7 @@ import '../Styling/blackjackmodal.css'
 export default class Game extends Component {
 
   state = {
+    bet:0,
     split: false,
     showDealerScore: false,
     bust: "",
@@ -15,7 +16,7 @@ export default class Game extends Component {
     userCards: [],
     dealerTotal: 0,
     userTotal: 0,
-    funds: 0,
+    funds: 100,
     blackjack: "",
     result: ""
   }
@@ -33,8 +34,9 @@ export default class Game extends Component {
       })
     }
     fetch(`http://localhost:3001/games/${this.props.gameId}`, configObj)
+  }
 
-
+  startGame=()=>{
     /* Do initial fetch to get two user cards and two dealer cards */
     setTimeout(() => {
       this.getInitialCard("users")
@@ -45,7 +47,7 @@ export default class Game extends Component {
           setTimeout(() => {
             this.hit("dealer")
             setTimeout(() => {
-              this.checkForSplit()
+              // this.checkForSplit()
               this.checkForBlackJack()
             }, 500)
           }, 500)
@@ -53,6 +55,24 @@ export default class Game extends Component {
       }, 500)
 
     }, 1000)
+  }
+
+  bet=(amount)=>{
+    this.setState({
+      bet:this.state.bet+amount,
+      funds: this.state.funds-amount
+    })
+  }
+
+  clearBet=()=>{
+    this.setState({
+      funds:this.state.funds+this.state.bet
+    })
+    setTimeout(() => {
+      this.setState({
+        bet:0
+      })
+    }, 300)
   }
 
 
@@ -195,15 +215,15 @@ export default class Game extends Component {
       })
   }
 
-  checkForSplit=()=>{
-    console.log(this.state.userCards[0].value)
-    console.log(this.state.userCards[1].value)
-    if (this.state.userCards[0].value===this.state.userCards[1].value){
-      this.setState({
-        split:true
-      })
-    }
-  }
+  // checkForSplit=()=>{
+  //   console.log(this.state.userCards[0].value)
+  //   console.log(this.state.userCards[1].value)
+  //   if (this.state.userCards[0].value===this.state.userCards[1].value){
+  //     this.setState({
+  //       split:true
+  //     })
+  //   }
+  // }
 
   checkForBlackJack = () => {
     console.log("Dealer Total", this.state.dealerTotal)
