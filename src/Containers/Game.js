@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Dealer from "../Components/Dealer";
 import User from "../Components/User";
-import Winner from "../Components/Winner";
+import Funds from "../Components/Funds";
 import BlackJackModal from "../Components/BlackJackModal";
 import '../Styling/blackjackmodal.css'
 
@@ -44,6 +44,7 @@ export default class Game extends Component {
           setTimeout(() => {
             this.hit("dealer")
             setTimeout(() => {
+              this.checkForSplit()
               this.checkForBlackJack()
             }, 500)
           }, 500)
@@ -186,7 +187,6 @@ export default class Game extends Component {
           let dealer_card = data.cards[0]
           dealer_card.hide = true
           dealer_card = [dealer_card]
-          console.log(dealer_card)
           this.setState({
             dealerCards: dealer_card,
             dealerTotal: data.player.score
@@ -195,9 +195,17 @@ export default class Game extends Component {
       })
   }
 
+  checkForSplit=()=>{
+    console.log(this.state.userCards[0].value)
+    console.log(this.state.userCards[1].value)
+    if (this.state.userCards[0].value===this.state.userCards[1].value){
+      this.setState({
+        split:true
+      })
+    }
+  }
+
   checkForBlackJack = () => {
-    console.log("Dealer Total", this.state.dealerTotal)
-    console.log("User Total", this.state.userTotal)
     if (this.state.userTotal === 21) {
       this.setState({ blackjack: "user", showDealerScore: true })
 
@@ -227,7 +235,7 @@ export default class Game extends Component {
             ) : null}
           </div>
           <div className="user-container">
-            <User userTurn={this.userTurn} cards={this.state.userCards} dealerTurn={this.dealerTurn} total={this.state.userTotal} />
+            <User split={this.state.split} userTurn={this.userTurn} cards={this.state.userCards} dealerTurn={this.dealerTurn} total={this.state.userTotal} />
           </div>
           {/* <div className="modal">
             <BlackJackModal>

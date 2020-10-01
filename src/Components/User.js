@@ -26,12 +26,12 @@ class User extends Component {
             setTimeout(() => {
             this.props.userTurn(move)
             }, 400)
-        } else {
+        } else if (move==="stay"){
             this.setState({disable:true})
             setTimeout(() => {
             this.props.dealerTurn()
             }, 400)
-        }
+        } 
 
     }
 
@@ -53,14 +53,11 @@ class User extends Component {
                     </div>
                 </div>
                 <div className="user-bottom-container">
-                    {/* <button id="hit" onClick={() => this.props.hit("user")}>HIT</button>
-                    <button id="stay" className="far fa-hand-paper" onClick={this.props.dealerTurn}></button>
-                    <button id="double">DOUBLE</button> */}
-                    {/* {this.checkForSplit() ? <button id="split">SPLIT</button> : null} */}
                     {this.state.disable===false ? <div className="fancybuttons">
                         <a href="#" onClick={()=> this.handleClick("hit")} className="red" data-speed="4" data-color="#f33">Hit</a>
                         <a href="#" onClick={()=> this.handleClick("stay")} className="green" data-speed="4" data-color="#3f3">Stay</a>
                         <a href="#" onClick={()=> this.handleClick("double")} className="blue" data-speed="4" data-color="#39f">Double</a>
+                        {/* {this.props.split===true ? <a href="#" onClick={()=> this.handleClick("split")} className="blue" data-speed="4" data-color="#39f">Split</a> : null } */}
                     </div> : null}
                     
                 </div>
