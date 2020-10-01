@@ -36,8 +36,17 @@ export default class Game extends Component {
 
     /* Do initial fetch to get two user cards and two dealer cards */
     setTimeout(()=> {
-      this.getInitialCards("users")
-      this.getInitialCards("dealers")
+      this.getInitialCard("users")
+      setTimeout(()=>{
+        this.getInitialCard("dealers")
+        setTimeout(()=>{
+          this.hit("user")
+          setTimeout(()=>{
+            this.hit("dealer")
+          },1500)
+        },1500)
+      },1500)
+      
     }, 1000)
   }
   stay = () => {
@@ -80,7 +89,7 @@ export default class Game extends Component {
       })
   }
 
-    getInitialCards=(player)=>{
+    getInitialCard=(player)=>{
         let id=0
         if (player=== "users"){
           id=this.props.userId
