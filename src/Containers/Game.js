@@ -110,28 +110,32 @@ export default class Game extends Component {
       .then(resp => resp.json())
       .then(data => {
         if (player === "dealer") {
+          let new_cards = [...this.state.dealerCards]
+          new_cards.push(data.cards)
           if (data.bust=="dealer"){
             this.setState({
               bust:"dealer",
-              dealerCards: data.cards,
+              dealerCards: new_cards,
               dealerTotal: data.player.score
             })
           } else {
             this.setState({
-              dealerCards: data.cards,
+              dealerCards: new_cards,
               dealerTotal: data.player.score
             })
           }
         } else {
+          let new_cards = [...this.state.userCards]
+          new_cards.push(data.cards)
           if (data.bust=="user"){
             this.setState({
               bust:"user",
-              userCards: data.cards,
+              userCards: new_cards,
               userTotal: data.player.score
             })
           }else {
             this.setState({
-              userCards: data.cards,
+              userCards: new_cards,
               userTotal: data.player.score
             })
           }
@@ -155,8 +159,12 @@ export default class Game extends Component {
               userTotal: data.player.score
             })
           } else {
+            let dealer_card= data.cards[0]
+            dealer_card.hide = true 
+            dealer_card = [dealer_card]
+            console.log(dealer_card)
             this.setState({
-              dealerCards: data.cards,
+              dealerCards: dealer_card,
               dealerTotal: data.player.score
             })
           }
