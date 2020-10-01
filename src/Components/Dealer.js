@@ -9,7 +9,7 @@ class Dealer extends Component {
         return (
             <div className="dealer">
                 <div className="dealer-score">
-                    <span class="yellow" data-speed="4" data-color="#ff3">{this.props.total}</span>
+                    <span className="yellow" data-speed="4" data-color="#ff3">{this.props.total}</span>
                 </div>
 
                 <div className="cards">

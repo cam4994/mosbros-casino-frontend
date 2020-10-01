@@ -4,6 +4,10 @@ import '../Styling/buttons.scss'
 
 class User extends Component {
 
+    state={
+        disable:false
+    }
+
 
     // checkForSplit = () => {
     //     if (this.props.cards[0].value === this.props.cards[1].value && this.props.cards.length === 2) {
@@ -13,6 +17,23 @@ class User extends Component {
     //     }
 
     // }
+
+    handleClick=(move)=>{
+        if (move==="hit"){
+            this.props.userTurn(move)
+        } else if (move==="double"){
+            this.setState({disable:true})
+            setTimeout(() => {
+            this.props.userTurn(move)
+            }, 400)
+        } else {
+            this.setState({disable:true})
+            setTimeout(() => {
+            this.props.dealerTurn()
+            }, 400)
+        }
+
+    }
 
     render() {
         return (
@@ -36,11 +57,12 @@ class User extends Component {
                     <button id="stay" className="far fa-hand-paper" onClick={this.props.dealerTurn}></button>
                     <button id="double">DOUBLE</button> */}
                     {/* {this.checkForSplit() ? <button id="split">SPLIT</button> : null} */}
-                    <div className="fancybuttons">
-                        <a href="#" onClick={() => this.props.hit("user")} className="red" data-speed="4" data-color="#f33">Hit</a>
-                        <a href="#" onClick={this.props.dealerTurn} className="green" data-speed="4" data-color="#3f3">Stay</a>
-                        <a href="#" className="blue" data-speed="4" data-color="#39f">Double</a>
-                    </div>
+                    {this.state.disable===false ? <div className="fancybuttons">
+                        <a href="#" onClick={()=> this.handleClick("hit")} className="red" data-speed="4" data-color="#f33">Hit</a>
+                        <a href="#" onClick={()=> this.handleClick("stay")} className="green" data-speed="4" data-color="#3f3">Stay</a>
+                        <a href="#" onClick={()=> this.handleClick("double")} className="blue" data-speed="4" data-color="#39f">Double</a>
+                    </div> : null}
+                    
                 </div>
             </div>
         );

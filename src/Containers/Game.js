@@ -6,7 +6,7 @@ import Winner from "../Components/Winner";
 export default class Game extends Component {
 
   state = {
-    bust:"",
+    bust: "",
     gameState: "",
     gameResult: "none",
     dealerCards: [],
@@ -36,31 +36,31 @@ export default class Game extends Component {
       }))
 
     /* Do initial fetch to get two user cards and two dealer cards */
-    setTimeout(()=> {
+    setTimeout(() => {
       this.getInitialCard("users")
-      setTimeout(()=>{
+      setTimeout(() => {
         this.getInitialCard("dealers")
-        setTimeout(()=>{
+        setTimeout(() => {
           this.hit("user")
-          setTimeout(()=>{
+          setTimeout(() => {
             this.hit("dealer")
-          },1500)
-        },1500)
-      },1500)
-      
+          }, 1500)
+        }, 1500)
+      }, 1500)
+
     }, 1000)
   }
 
-  
+
   dealerTurn = () => {
     /* begin dealer's turn */
-    if (this.state.dealerTotal<17){
+    if (this.state.dealerTotal < 17) {
       this.hit("dealer")
-      setTimeout(()=>{
+      setTimeout(() => {
         this.dealerTurn()
-      },2000)
+      }, 2000)
     } else {
-      if (this.state.dealerTotal>21){
+      if (this.state.dealerTotal > 21) {
         this.bust("dealer")
       } else {
         this.dealerStay()
@@ -68,15 +68,36 @@ export default class Game extends Component {
     }
   }
 
-  dealerStay =() =>{
+  dealerStay = () => {
     console.log('dealer will stay')
   }
 
-  bust=(player)=>{
+  bust = (player) => {
     console.log(`${player} busted`)
   }
 
   /* callback function for dealer and user components */
+
+  userTurn = (move) => {
+    if (move === "hit") {
+      this.hit("user")
+      setTimeout(() => {
+        if (this.state.userTotal > 21) {
+          this.bust("user")
+        }
+      }, 500)
+    } else if (move === "double"){
+      this.hit("user")
+      setTimeout(() => {
+        if (this.state.userTotal > 21) {
+          this.bust("user")
+        } else {
+          this.dealerTurn()
+        }
+      }, 1000)
+    }
+  }
+
   hit = (player) => {
     this.hitUpdate(player)
   }
@@ -102,7 +123,7 @@ export default class Game extends Component {
           new_cards.push(data.cards)
           if (data.bust==="dealer"){
             this.setState({
-              bust:"dealer",
+              bust: "dealer",
               dealerCards: new_cards,
               dealerTotal: data.player.score
             })
@@ -117,11 +138,11 @@ export default class Game extends Component {
           new_cards.push(data.cards)
           if (data.bust==="user"){
             this.setState({
-              bust:"user",
+              bust: "user",
               userCards: new_cards,
               userTotal: data.player.score
             })
-          }else {
+          } else {
             this.setState({
               userCards: new_cards,
               userTotal: data.player.score
@@ -131,33 +152,33 @@ export default class Game extends Component {
       })
   }
 
-    getInitialCard=(player)=>{
-        let id=0
-        if (player=== "users"){
-          id=this.props.userId
-        } else {
-          id=this.props.gameId
-        }
-        fetch(`http://localhost:3001/${player}/${id}`)
-        .then(resp => resp.json())
-        .then(data => {
-          if (player === "users"){
-            this.setState({
-              userCards: data.cards,
-              userTotal: data.player.score
-            })
-          } else {
-            let dealer_card= data.cards[0]
-            dealer_card.hide = true 
-            dealer_card = [dealer_card]
-            console.log(dealer_card)
-            this.setState({
-              dealerCards: dealer_card,
-              dealerTotal: data.player.score
-            })
-          }
-        })
+  getInitialCard = (player) => {
+    let id = 0
+    if (player === "users") {
+      id = this.props.userId
+    } else {
+      id = this.props.gameId
     }
+    fetch(`http://localhost:3001/${player}/${id}`)
+      .then(resp => resp.json())
+      .then(data => {
+        if (player === "users") {
+          this.setState({
+            userCards: data.cards,
+            userTotal: data.player.score
+          })
+        } else {
+          let dealer_card = data.cards[0]
+          dealer_card.hide = true
+          dealer_card = [dealer_card]
+          console.log(dealer_card)
+          this.setState({
+            dealerCards: dealer_card,
+            dealerTotal: data.player.score
+          })
+        }
+      })
+  }
 
   render() {
     return (
@@ -167,7 +188,7 @@ export default class Game extends Component {
             <Dealer hit={this.hit} cards={this.state.dealerCards} total={this.state.dealerTotal} />
           </div>
           <div className="user-container">
-            <User hit={this.hit} cards={this.state.userCards} dealerTurn={this.dealerTurn} total={this.state.userTotal} />
+            <User userTurn={this.userTurn} cards={this.state.userCards} dealerTurn={this.dealerTurn} total={this.state.userTotal} />
           </div>
         </div>
       </div>
