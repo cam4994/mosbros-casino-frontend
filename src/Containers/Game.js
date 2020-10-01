@@ -45,7 +45,7 @@ export default class Game extends Component {
           setTimeout(() => {
             this.hit("dealer")
             setTimeout(() => {
-              this.checkForSplit()
+              // this.checkForSplit()
               this.checkForBlackJack()
             }, 500)
           }, 500)
@@ -195,15 +195,15 @@ export default class Game extends Component {
       })
   }
 
-  checkForSplit=()=>{
-    console.log(this.state.userCards[0].value)
-    console.log(this.state.userCards[1].value)
-    if (this.state.userCards[0].value===this.state.userCards[1].value){
-      this.setState({
-        split:true
-      })
-    }
-  }
+  // checkForSplit = () => {
+  //   console.log(this.state.userCards[0].value)
+  //   console.log(this.state.userCards[1].value)
+  //   if (this.state.userCards[0].value === this.state.userCards[1].value) {
+  //     this.setState({
+  //       split: true
+  //     })
+  //   }
+  // }
 
   checkForBlackJack = () => {
     console.log("Dealer Total", this.state.dealerTotal)
@@ -275,6 +275,9 @@ export default class Game extends Component {
           </div>
           <div className="user-container">
             <User split={this.state.split} userTurn={this.userTurn} cards={this.state.userCards} dealerTurn={this.dealerTurn} total={this.state.userTotal} />
+          </div>
+          <div className="funds-container">
+            <h1>Hello</h1>
           </div>
         </div>
       </div>

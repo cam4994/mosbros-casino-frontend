@@ -112,6 +112,17 @@
   grid-area: e;
 }
 
+.funds-container {
+  text-align: center;
+  padding: 20px 0;
+  font-size: 12px;
+  margin: auto;
+  grid-area: f;
+}
+.funds-container > h1 {
+  color: white
+}
+
 .user {
   display: grid;
   grid-template-areas: 
