@@ -77,7 +77,19 @@ export default class Game extends Component {
   }
 
   /* callback function for dealer and user components */
+
+  userTurn=()=>{
+    console.log('started user turn')
+    this.hit("user")
+    setTimeout(()=>{
+      if (this.state.userTotal>21){
+        this.bust("user")
+      }
+    }, 500)
+  }
+
   hit = (player) => {
+    console.log('started hit function')
     this.hitUpdate(player)
   }
 
@@ -159,7 +171,7 @@ export default class Game extends Component {
             <Dealer hit={this.hit} cards={this.state.dealerCards} total={this.state.dealerTotal} />
           </div>
           <div className="user-container">
-            <User hit={this.hit} cards={this.state.userCards} dealerTurn={this.dealerTurn} total={this.state.userTotal} />
+            <User userTurn={this.userTurn} cards={this.state.userCards} dealerTurn={this.dealerTurn} total={this.state.userTotal} />
           </div>
         </div>
       </div>

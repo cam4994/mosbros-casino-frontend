@@ -37,7 +37,7 @@ class User extends Component {
                     <button id="double">DOUBLE</button> */}
                     {/* {this.checkForSplit() ? <button id="split">SPLIT</button> : null} */}
                     <div className="fancybuttons">
-                        <a href="#" onClick={() => this.props.hit("user")} className="red" data-speed="4" data-color="#f33">Hit</a>
+                        <a href="#" onClick={this.props.userTurn} className="red" data-speed="4" data-color="#f33">Hit</a>
                         <a href="#" onClick={this.props.dealerTurn} className="green" data-speed="4" data-color="#3f3">Stay</a>
                         <a href="#" className="blue" data-speed="4" data-color="#39f">Double</a>
                     </div>
