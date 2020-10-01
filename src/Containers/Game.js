@@ -6,6 +6,7 @@ import Winner from "../Components/Winner";
 export default class Game extends Component {
 
   state = {
+    split: false,
     showDealerScore:false,
     bust: "",
     dealerCards: [],
@@ -75,14 +76,19 @@ export default class Game extends Component {
   }
 
   dealerStay = () => {
-    console.log('dealer will stay')
+    //check for winner
+    if (this.state.dealerTotal>this.state.userTotal){
+      console.log("Dealer Wins")
+    } else if (this.state.dealerTotal<this.state.userTotal){
+      console.log("User Wins")
+    } else {
+      console.log("Push")
+    }
   }
 
   bust = (player) => {
     console.log(`${player} busted`)
   }
-
-  /* callback function for dealer and user components */
 
   userTurn = (move) => {
     if (move === "hit") {
