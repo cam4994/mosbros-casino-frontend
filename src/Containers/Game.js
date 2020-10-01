@@ -15,7 +15,8 @@ export default class Game extends Component {
     dealerTotal: 0,
     userTotal: 0,
     funds: 0,
-    blackjack: ""
+    blackjack: "",
+    result: ""
   }
   componentDidMount() {
     /* start game on backend*/
@@ -64,7 +65,7 @@ export default class Game extends Component {
         this.hit("dealer")
         setTimeout(() => {
           this.dealerTurn()
-        }, 1000)
+        }, 500)
       } else {
         if (this.state.dealerTotal > 21) {
           this.bust("dealer")
@@ -72,17 +73,23 @@ export default class Game extends Component {
           this.dealerStay()
         }
       }
-    }, 1000)
+    }, 500)
 
 
   }
 
   dealerStay = () => {
-    console.log('dealer will stay')
+    if (this.state.userTotal > this.state.dealerTotal) {
+      this.setState({ result: "win" })
+    } else if (this.state.userTotal < this.state.dealerTotal) {
+      this.setState({ result: "loss" })
+    } else {
+      this.setState({ result: "push" })
+    }
   }
 
   bust = (player) => {
-    console.log(`${player} busted`)
+    this.setState({ bust: player })
   }
 
   /* callback function for dealer and user components */
@@ -103,7 +110,7 @@ export default class Game extends Component {
         } else {
           this.dealerTurn()
         }
-      }, 1000)
+      }, 500)
     }
   }
 
@@ -192,7 +199,9 @@ export default class Game extends Component {
   checkForBlackJack = () => {
     console.log("Dealer Total", this.state.dealerTotal)
     console.log("User Total", this.state.userTotal)
-    if (this.state.userTotal === 21) {
+    if (this.state.userTotal === 21 && this.state.dealerTotal === 21) {
+      this.setState({ result: "push" })
+    } else if (this.state.userTotal === 21) {
       this.setState({ blackjack: "user", showDealerScore: true })
 
     } else if (this.state.dealerTotal === 21) {
@@ -206,6 +215,7 @@ export default class Game extends Component {
         <div className="game-container">
           <div className="dealer-container">
             <Dealer showDealerScore={this.state.showDealerScore} hit={this.hit} cards={this.state.dealerCards} total={this.state.dealerTotal} />
+            {/* MODAL FOR IF A BLACKJACK HAPPENS ON THE INITIAL DEAL */}
             {this.state.blackjack === "user" ? (
               <BlackJackModal>
                 <div style={{ color: 'black' }}>
@@ -219,17 +229,44 @@ export default class Game extends Component {
                 </div>
               </BlackJackModal>
             ) : null}
+            {/* MODAL FOR USER WIN, LOSS or PUSH */}
+            {this.state.result === "win" ? (
+              <BlackJackModal>
+                <div style={{ color: 'black' }}>
+                  Congratulations, you won!
+                </div>
+              </BlackJackModal>
+            ) : this.state.result === "loss" ? (
+              <BlackJackModal>
+                <div style={{ color: 'black' }}>
+                  Sorry, the dealer won!
+                </div>
+              </BlackJackModal>
+            ) : this.state.result === "push" ? (
+              <BlackJackModal>
+                <div style={{ color: 'black' }}>
+                  It's a Draw!
+                </div>
+              </BlackJackModal>
+            ) : null}
+            {/* MODAL FOR DEALER OR USER BUST */}
+            {this.state.bust === "user" ? (
+              <BlackJackModal>
+                <div style={{ color: 'black' }}>
+                  OH NO! You went over 21! BUST!
+                </div>
+              </BlackJackModal>
+            ) : this.state.bust === "dealer" ? (
+              <BlackJackModal>
+                <div style={{ color: 'black' }}>
+                  Dealer busts! You Win!
+                </div>
+              </BlackJackModal>
+            ) : null}
           </div>
           <div className="user-container">
             <User userTurn={this.userTurn} cards={this.state.userCards} dealerTurn={this.dealerTurn} total={this.state.userTotal} />
           </div>
-          {/* <div className="modal">
-            <BlackJackModal>
-              <div style={{ color: 'black' }}>
-                The Best Has Happened To ME
-            </div>
-            </BlackJackModal>
-          </div> */}
         </div>
       </div>
     );
