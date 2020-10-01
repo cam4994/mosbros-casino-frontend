@@ -28,9 +28,9 @@ class User extends Component {
                     </div>
                 </div>
                 <div className="move">
-                    {/* <button id="hit" onClick={() => this.props.hit("user")}>HIT</button> */}
-                    {/* <button id="stay" className="far fa-hand-paper" onClick={this.props.stay}></button> */}
-                    {/* <button id="double">DOUBLE</button> */}
+                    <button id="hit" onClick={() => this.props.hit("user")}>HIT</button>
+                    <button id="stay" className="far fa-hand-paper" onClick={this.props.dealerTurn}></button>
+                    <button id="double">DOUBLE</button>
                     {/* {this.checkForSplit() ? <button id="split">SPLIT</button> : null} */}
                 </div>
             </div>

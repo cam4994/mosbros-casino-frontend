@@ -49,6 +49,8 @@ export default class Game extends Component {
       
     }, 1000)
   }
+
+  
   stay = () => {
     /* begin dealer's turn */
 
