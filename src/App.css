@@ -111,6 +111,26 @@
   margin: auto;
   grid-area: e;
 }
+
+.user {
+  display: grid;
+  grid-template-areas: 
+  "a"
+  "b";
+  grid-template-rows: 225px 175px ;
+  grid-template-columns: 750px;             
+  /* padding: 10px; */
+  width: auto;
+  height: auto;
+}
+.user-top-container {
+  margin: auto;
+}
+.user-bottom-container {
+  position: absolute;
+  left: 475px;
+  bottom: 80px;
+}
 .move {
 
 }

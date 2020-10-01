@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Card from "./Card";
+import '../Styling/buttons.scss'
 
 class User extends Component {
 
@@ -16,22 +17,30 @@ class User extends Component {
     render() {
         return (
             <div className="user">
-                <div className="score">
-                    {this.props.total}
+                <div className="user-top-container">
+                <div className="user-score">
+                    <span className="yellow" data-speed="4" data-color="#ff3">{this.props.total}</span>
                 </div>
+                    
 
-                <div className="cards">
-                    <div className="playingCards">
-                        <ul className="table">
-                            {this.props.cards.map((card) => <Card key={card.id} card={card} />)}
-                        </ul>
+                    <div className="cards">
+                        <div className="playingCards">
+                            <ul className="table">
+                                {this.props.cards.map((card) => <Card key={card.id} card={card} />)}
+                            </ul>
+                        </div>
                     </div>
                 </div>
-                <div className="move">
-                    <button id="hit" onClick={() => this.props.hit("user")}>HIT</button>
+                <div className="user-bottom-container">
+                    {/* <button id="hit" onClick={() => this.props.hit("user")}>HIT</button>
                     <button id="stay" className="far fa-hand-paper" onClick={this.props.dealerTurn}></button>
-                    <button id="double">DOUBLE</button>
+                    <button id="double">DOUBLE</button> */}
                     {/* {this.checkForSplit() ? <button id="split">SPLIT</button> : null} */}
+                    <div className="fancybuttons">
+                        <a href="#" className="red" data-speed="4" data-color="#f33">Hit</a>
+                        <a href="#" className="green" data-speed="4" data-color="#3f3">Stay</a>
+                        <a href="#" className="blue" data-speed="4" data-color="#39f">Double</a>
+                    </div>
                 </div>
             </div>
         );
