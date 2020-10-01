@@ -296,6 +296,9 @@ export default class Game extends Component {
           <div className="user-container">
             <User split={this.state.split} userTurn={this.userTurn} cards={this.state.userCards} dealerTurn={this.dealerTurn} total={this.state.userTotal} />
           </div>
+          <div className="funds-container">
+            <h1>Hello</h1>
+          </div>
         </div>
       </div>
     );
