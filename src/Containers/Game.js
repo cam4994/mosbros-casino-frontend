@@ -2,17 +2,20 @@ import React, { Component } from "react";
 import Dealer from "../Components/Dealer";
 import User from "../Components/User";
 import Winner from "../Components/Winner";
+import BlackJackModal from "../Components/BlackJackModal";
+import '../Styling/blackjackmodal.css'
 
 export default class Game extends Component {
 
   state = {
-    showDealerScore:false,
+    showDealerScore: false,
     bust: "",
     dealerCards: [],
     userCards: [],
     dealerTotal: 0,
     userTotal: 0,
     funds: 0,
+    blackjack: ""
   }
   componentDidMount() {
     /* start game on backend*/
@@ -28,7 +31,7 @@ export default class Game extends Component {
       })
     }
     fetch(`http://localhost:3001/games/${this.props.gameId}`, configObj)
-      
+
 
     /* Do initial fetch to get two user cards and two dealer cards */
     setTimeout(() => {
@@ -39,12 +42,12 @@ export default class Game extends Component {
           this.hit("user")
           setTimeout(() => {
             this.hit("dealer")
-            // setTimeout(() => {
-            //   this.checkForBlackJack()
-            // }, 1500)
-          }, 1500)
-        }, 1500)
-      }, 1500)
+            setTimeout(() => {
+              this.checkForBlackJack()
+            }, 500)
+          }, 500)
+        }, 500)
+      }, 500)
 
     }, 1000)
   }
@@ -53,10 +56,10 @@ export default class Game extends Component {
   dealerTurn = () => {
     /* begin dealer's turn */
     this.setState({
-      showDealerScore:true
+      showDealerScore: true
     })
 
-    setTimeout(()=>{
+    setTimeout(() => {
       if (this.state.dealerTotal < 17) {
         this.hit("dealer")
         setTimeout(() => {
@@ -71,7 +74,7 @@ export default class Game extends Component {
       }
     }, 1000)
 
-    
+
   }
 
   dealerStay = () => {
@@ -92,7 +95,7 @@ export default class Game extends Component {
           this.bust("user")
         }
       }, 500)
-    } else if (move === "double"){
+    } else if (move === "double") {
       this.hit("user")
       setTimeout(() => {
         if (this.state.userTotal > 21) {
@@ -127,7 +130,7 @@ export default class Game extends Component {
         if (player === "dealer") {
           let new_cards = [...this.state.dealerCards]
           new_cards.push(data.cards)
-          if (data.bust==="dealer"){
+          if (data.bust === "dealer") {
             this.setState({
               bust: "dealer",
               dealerCards: new_cards,
@@ -142,7 +145,7 @@ export default class Game extends Component {
         } else {
           let new_cards = [...this.state.userCards]
           new_cards.push(data.cards)
-          if (data.bust==="user"){
+          if (data.bust === "user") {
             this.setState({
               bust: "user",
               userCards: new_cards,
@@ -186,16 +189,47 @@ export default class Game extends Component {
       })
   }
 
+  checkForBlackJack = () => {
+    console.log("Dealer Total", this.state.dealerTotal)
+    console.log("User Total", this.state.userTotal)
+    if (this.state.userTotal === 21) {
+      this.setState({ blackjack: "user", showDealerScore: true })
+
+    } else if (this.state.dealerTotal === 21) {
+      this.setState({ blackjack: "dealer", showDealerScore: true })
+    }
+  }
+
   render() {
     return (
       <div className="game">
         <div className="game-container">
           <div className="dealer-container">
             <Dealer showDealerScore={this.state.showDealerScore} hit={this.hit} cards={this.state.dealerCards} total={this.state.dealerTotal} />
+            {this.state.blackjack === "user" ? (
+              <BlackJackModal>
+                <div style={{ color: 'black' }}>
+                  BLACKJACK FOR USER
+                </div>
+              </BlackJackModal>
+            ) : this.state.blackjack === "dealer" ? (
+              <BlackJackModal>
+                <div style={{ color: 'black' }}>
+                  BLACKJACK FOR DEALER
+                </div>
+              </BlackJackModal>
+            ) : null}
           </div>
           <div className="user-container">
             <User userTurn={this.userTurn} cards={this.state.userCards} dealerTurn={this.dealerTurn} total={this.state.userTotal} />
           </div>
+          {/* <div className="modal">
+            <BlackJackModal>
+              <div style={{ color: 'black' }}>
+                The Best Has Happened To ME
+            </div>
+            </BlackJackModal>
+          </div> */}
         </div>
       </div>
     );
