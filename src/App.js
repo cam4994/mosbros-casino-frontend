@@ -43,6 +43,8 @@ class App extends React.Component {
     }
     let username = e.target.username.value
     let password = e.target.password.value
+    e.target.username.value = ''
+    e.target.password.value = ''
 
     let configObj = {
       method: "POST",

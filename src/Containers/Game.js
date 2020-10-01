@@ -100,7 +100,7 @@ export default class Game extends Component {
         if (player === "dealer") {
           let new_cards = [...this.state.dealerCards]
           new_cards.push(data.cards)
-          if (data.bust=="dealer"){
+          if (data.bust==="dealer"){
             this.setState({
               bust:"dealer",
               dealerCards: new_cards,
@@ -115,7 +115,7 @@ export default class Game extends Component {
         } else {
           let new_cards = [...this.state.userCards]
           new_cards.push(data.cards)
-          if (data.bust=="user"){
+          if (data.bust==="user"){
             this.setState({
               bust:"user",
               userCards: new_cards,
