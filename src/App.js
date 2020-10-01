@@ -3,7 +3,7 @@ import './App.css';
 import SignUp from './Containers/SignUp'
 import LogIn from './Containers/LogIn'
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch, withRouter } from "react-router-dom";
 import NavBar from './Components/NavBar';
 import About from './Components/About';
 import Home from './Components/Home';
@@ -45,7 +45,6 @@ class App extends React.Component {
     let password = e.target.password.value
     e.target.username.value = ''
     e.target.password.value = ''
-
     let configObj = {
       method: "POST",
       headers: {
@@ -67,11 +66,12 @@ class App extends React.Component {
     if (response.error) {
       response.error.forEach(error => console.log(error))
     } else {
-      console.log(response)
       localStorage.setItem('Token', response.jwt)
       this.setState({ userId: response.user.id })
     }
   }
+
+
 
   render() {
     return (
