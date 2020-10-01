@@ -101,13 +101,18 @@
   text-align: center;
   padding: 20px 0;
   font-size: 12px;
+  margin: auto;
   grid-area: b;
 }
 .user-container {
   text-align: center;
   padding: 20px 0;
   font-size: 12px;
+  margin: auto;
   grid-area: e;
+}
+.move {
+
 }
 
 .App {
