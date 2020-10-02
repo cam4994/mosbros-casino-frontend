@@ -35,19 +35,39 @@ const BUSTCHANCE = {
 
 export default class Stats extends Component {
     render() {
-        console.log("Stats Component")
         console.log(this.props.userTotal, this.props.dealerCard.value)
+        console.log(this.props.dealerCard.rank)
         let userTotal = this.props.userTotal
+        let recommendation = ''
         if (userTotal <= 11) {
             userTotal = 11
+            recommendation = 'Hit'
+        } else if (userTotal >= 17) {
+            recommendation = 'Stand'
+        } else if (userTotal === 12) {
+            if (this.props.dealerCard.rank >= 4 && this.props.dealerCard.rank <= 6) {
+                recommendation = 'Stand'
+            } else {
+                recommendation = 'Hit'
+            }
+        } else {
+            if (this.props.dealerCard.rank >= 7) {
+                recommendation = 'Hit'
+            } else {
+                recommendation = 'Stand'
+            }
         }
+
+
+        
+
         return (
             <div>
                 <Table striped bordered hover variant="dark">
                     <thead>
                         <tr>
-                            <th>Dealer Odds to Bust</th>
-                            <th>Your Odds to Bust</th>
+                            <th>Dealer Bust %</th>
+                            <th>Player Bust %</th>
                             <th>Recommendation</th>
                         </tr>
                     </thead>
@@ -55,7 +75,11 @@ export default class Stats extends Component {
                         <tr>
                             <td>{`${DEALERBUSTODDS[this.props.dealerCard.value]}%`}</td>
                             <td>{`${BUSTCHANCE[userTotal]}%`}</td>
-                            <td>Hit</td>
+                            {recommendation === 'Hit' ? (
+                            <td style={{color:'green'}}>{recommendation}</td>
+                            ) : (
+                                <td style={{color:'red'}}>{recommendation}</td>
+                            )}
                         </tr>
                         {/* <tr>
                             <td>2</td>
