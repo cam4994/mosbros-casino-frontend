@@ -62,12 +62,12 @@ export default class Game extends Component {
               setTimeout(() => {
                 // this.checkForSplit()
                 this.checkForBlackJack()
-              }, 500)
-            }, 500)
-          }, 500)
-        }, 500)
+              }, 700)
+            }, 700)
+          }, 700)
+        }, 700)
 
-      }, 1000)
+      }, 750)
     }
 
   }
