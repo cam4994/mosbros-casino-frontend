@@ -199,6 +199,11 @@
   grid-area: d;
 }
 
+.about-title {
+  font-weight: bolder;
+  font-size: 36px;
+}
+
 .user {
   display: grid;
   grid-template-areas: 

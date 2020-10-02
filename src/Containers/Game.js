@@ -322,13 +322,13 @@ export default class Game extends Component {
             {this.state.blackjack === "user" ? (
               <BlackJackModal>
                 <div className='modal-win'>
-                  BLACKJACK FOR USER
+                  BLACKJACK!!!
                 </div>
               </BlackJackModal>
             ) : this.state.blackjack === "dealer" ? (
               <BlackJackModal>
                 <div className='modal-loss'>
-                  BLACKJACK FOR DEALER
+                  Sorry, Blackjack for the dealer.
                 </div>
               </BlackJackModal>
             ) : null}
