@@ -336,19 +336,19 @@ export default class Game extends Component {
             {/* MODAL FOR USER WIN, LOSS or PUSH */}
             {this.state.result === "win" ? (
               <BlackJackModal>
-                <div style={{ color: 'black' }}>
+                <div className='modal-win'>
                   Congratulations, you won!
                 </div>
               </BlackJackModal>
             ) : this.state.result === "loss" ? (
               <BlackJackModal>
-                <div style={{ color: 'black' }}>
+                <div className='modal-lose'>
                   Sorry, the dealer won!
                 </div>
               </BlackJackModal>
             ) : this.state.result === "push" ? (
               <BlackJackModal>
-                <div style={{ color: 'black' }}>
+                <div className='modal-draw'>
                   It's a Draw!
                 </div>
               </BlackJackModal>
@@ -356,13 +356,13 @@ export default class Game extends Component {
             {/* MODAL FOR DEALER OR USER BUST */}
             {this.state.bust === "user" ? (
               <BlackJackModal>
-                <div style={{ color: 'black' }}>
+                <div className='modal-loss'>
                   OH NO! You went over 21! BUST!
                 </div>
               </BlackJackModal>
             ) : this.state.bust === "dealer" ? (
               <BlackJackModal>
-                <div style={{ color: 'black' }}>
+                <div className='modal-win'>
                   Dealer busts! You Win!
                 </div>
               </BlackJackModal>
