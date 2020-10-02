@@ -1,11 +1,12 @@
 .Modal {
     position: fixed;
     z-index: 500;
-    background-color: white;
-    width: 50%;
+    background: rgb(0,0,0);
+    background: linear-gradient(90deg, rgba(0,0,0,1) 0, #434343 100%);
+    width: 30%;
     border: 1px solid #ccc;
     box-shadow: 1px 1px 1px black;
-    padding: 16px;
+    padding: 8px;
     left: 15%;
     top: 40%;
     box-sizing: border-box;
@@ -13,13 +14,13 @@
 }
 
 .modal-win {
-
+    color: green;
 }
 .modal-loss {
-
+    color: red;
 }
 .modal-draw {
-
+    color: black;
 }
 @media (min-width: 600px) {
     .Modal {
