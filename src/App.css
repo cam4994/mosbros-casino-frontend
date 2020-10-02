@@ -86,7 +86,7 @@
   "a b c"
   "d e f";
   grid-template-rows: auto auto ;
-  grid-template-columns: 300px 1fr 600px;             
+  grid-template-columns: 300px 1fr 425px;             
   /* padding: 10px; */
   top: 0px;
   left: 0px;
@@ -116,12 +116,20 @@
   text-align: center;
   padding: 20px 0;
   font-size: 12px;
-  margin: auto;
   grid-area: f;
+  margin-right: 30%;
+  margin-top: 20%;
+}
+.funds {
+  border-style: solid;
+  border-color: white;
 }
 
 .stats-container {
-  
+  text-align: center;
+  font-size: 12px;
+  margin: auto;
+  grid-area: d;
 }
 
 .user {

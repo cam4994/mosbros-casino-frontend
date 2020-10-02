@@ -234,8 +234,6 @@ export default class Game extends Component {
   // }
 
   checkForBlackJack = () => {
-    console.log("Dealer Total", this.state.dealerTotal)
-    console.log("User Total", this.state.userTotal)
     if (this.state.userTotal === 21 && this.state.dealerTotal === 21) {
       this.setState({ result: "push" })
     } else if (this.state.userTotal === 21) {
@@ -308,7 +306,9 @@ export default class Game extends Component {
             <Funds bet={this.state.bet} funds={this.state.funds} addToBet={this.addToBet} clearBet={this.clearBet} startGame={this.startGame} />
           </div>
           <div className="stats-container">
-              <Stats userTotal={this.state.userTotal} dealerTotal={this.state.dealerTotal}/>
+              {this.state.userCards.length >= 2 && this.state.dealerCards.length >= 2 ? (
+                <Stats userTotal={this.state.userTotal} dealerCard={this.state.dealerCards[1]}/>
+              ) : null}
           </div>
         </div>
       </div>

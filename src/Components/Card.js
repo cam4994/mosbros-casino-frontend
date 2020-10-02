@@ -12,7 +12,7 @@ export default class Card extends Component {
 
     return (
       <li>{this.props.hide ? (
-        <div class="card back">
+        <div className="card back">
         </div>
       ) : (
         <div className={`card rank-${this.props.card.value} ${suit}`}>
