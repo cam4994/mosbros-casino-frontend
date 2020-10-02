@@ -6,10 +6,13 @@ import BlackJackModal from "../Components/BlackJackModal";
 import Stats from "../Components/Stats"
 import '../Styling/blackjackmodal.css'
 
+
 export default class Game extends Component {
+  
 
   state = {
-    showUser:false,
+    gameOver: false,
+    showUser: false,
     bet: 0,
     split: false,
     showDealerScore: false,
@@ -46,7 +49,7 @@ export default class Game extends Component {
     /* Do initial fetch to get two user cards and two dealer cards */
     if (this.state.bet > 0) {
       this.setState({
-        showUser:true
+        showUser: true
       })
       setTimeout(() => {
         this.getInitialCard("users")
@@ -117,14 +120,14 @@ export default class Game extends Component {
 
   dealerStay = () => {
     if (this.state.userTotal > this.state.dealerTotal) {
-      console.log('you win')
+      
       this.setState({
-        result: "win", funds: this.state.funds + (this.state.bet * 2)
+        result: "win", funds: this.state.funds + (this.state.bet * 2), gameOver:true
       })
     } else if (this.state.userTotal < this.state.dealerTotal) {
-      this.setState({ result: "loss" })
+      this.setState({ result: "loss", gameOver:true })
     } else {
-      this.setState({ result: "push", funds: this.state.funds + this.state.bet })
+      this.setState({ result: "push", funds: this.state.funds + this.state.bet, gameOver:true })
     }
 
     setTimeout(() => {
@@ -148,9 +151,9 @@ export default class Game extends Component {
   bust = (player) => {
     if (player === "dealer") {
       console.log("dealer busted")
-      this.setState({ bust: player, funds: this.state.funds + (this.state.bet * 2) })
+      this.setState({ bust: player, funds: this.state.funds + (this.state.bet * 2), gameOver:true })
     } else {
-      this.setState({ bust: player })
+      this.setState({ bust: player, gameOver:true })
     }
 
     setTimeout(() => {
@@ -285,12 +288,12 @@ export default class Game extends Component {
 
   checkForBlackJack = () => {
     if (this.state.userTotal === 21 && this.state.dealerTotal === 21) {
-      this.setState({ result: "push", showDealerScore: true, funds: this.state.funds + this.state.bet })
+      this.setState({ result: "push", showDealerScore: true, funds: this.state.funds + this.state.bet, gameOver:true })
     } else if (this.state.userTotal === 21) {
-      this.setState({ blackjack: "user", showDealerScore: true, funds: this.state.funds + (this.state.bet * 2.5) })
+      this.setState({ blackjack: "user", showDealerScore: true, funds: this.state.funds + (this.state.bet * 2.5), gameOver:true })
 
     } else if (this.state.dealerTotal === 21) {
-      this.setState({ blackjack: "dealer", showDealerScore: true })
+      this.setState({ blackjack: "dealer", showDealerScore: true, gameOver:true })
     }
     setTimeout(() => {
 
@@ -308,6 +311,7 @@ export default class Game extends Component {
     }, 200)
 
   }
+
 
   render() {
     return (
@@ -368,14 +372,17 @@ export default class Game extends Component {
             <div className="user-container">
               <User split={this.state.split} userTurn={this.userTurn} cards={this.state.userCards} dealerTurn={this.dealerTurn} total={this.state.userTotal} />
             </div> : null}
+          
+            <div className="funds-container">
+              <Funds bet={this.state.bet} funds={this.state.funds} addToBet={this.addToBet} clearBet={this.clearBet} startGame={this.startGame} gameOver={this.state.gameOver}/>
+              
+            </div> 
 
-          <div className="funds-container">
-            <Funds bet={this.state.bet} funds={this.state.funds} addToBet={this.addToBet} clearBet={this.clearBet} startGame={this.startGame} />
-          </div>
+
           <div className="stats-container">
-              {this.state.userCards.length >= 2 && this.state.dealerCards.length >= 2 && this.state.blackjack === '' && this.state.bust === '' ? (
-                <Stats userTotal={this.state.userTotal} dealerCard={this.state.dealerCards[1]}/>
-              ) : null}
+            {this.state.userCards.length >= 2 && this.state.dealerCards.length >= 2 && this.state.blackjack === '' && this.state.bust === '' ? (
+              <Stats userTotal={this.state.userTotal} dealerCard={this.state.dealerCards[1]} />
+            ) : null}
           </div>
         </div>
       </div>
