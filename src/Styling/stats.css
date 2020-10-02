@@ -1,33 +1,16 @@
-/* #highscore-table {
-    width: 300px;
-    border-collapse: collapse;
-    overflow: hidden;
-    text-align: center;
-    font-family: 'Grandstander';
-    border-radius: 20px;
+th, td {
+  background-color: burlywood;
+  color: black;
+  text-align: center;
+  font-size: 14px;
+  font-weight: bolder;
+  opacity: 0.7
+}
     
-    margin-top: 5%;
-    margin-left: 19%;
-    box-shadow: 0 0 20px rgba(0,0,0,0.1);
-    }
+thead th {
+  background-color: burlywood;
+}
     
-    th,
-    td {
-    padding: 15px;
-    background-color: rgba(255,255,255,0.2);
-    color: black;
-    text-align: center;
-    }
-    
-    th {
-    text-align: center;
-    }
-    
-    thead th {
-      background-color: burlywood;
-    }
-    
-    
-    tbody	tr:hover {
-        background-color: rgba(255,255,255,0.3);
-      } */
+td:hover {
+  background-color: rgb(247, 215, 173);
+}

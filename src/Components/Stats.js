@@ -43,10 +43,10 @@ export default class Stats extends Component {
             userTotal = 11
             recommendation = 'Hit'
         } else if (userTotal >= 17) {
-            recommendation = 'Stand'
+            recommendation = 'Stay'
         } else if (userTotal === 12) {
             if (this.props.dealerCard.rank >= 4 && this.props.dealerCard.rank <= 6) {
-                recommendation = 'Stand'
+                recommendation = 'Stay'
             } else {
                 recommendation = 'Hit'
             }
@@ -54,7 +54,7 @@ export default class Stats extends Component {
             if (this.props.dealerCard.rank >= 7) {
                 recommendation = 'Hit'
             } else {
-                recommendation = 'Stand'
+                recommendation = 'Stay'
             }
         }
 
