@@ -4,23 +4,33 @@
     background: burlywood;
     font-size: 22px;
     width: 30%;
-    border: 1px solid rgb(0, 0, 0);
     box-shadow: 1px 1px 1px black;
     padding: 8px;
     left: 15%;
-    top: 37%;
-    box-sizing: border-box;
+    top: 38%;
+    padding: 5px;
+    border-style: solid;
+    border-collapse: collapse;
+    overflow: hidden;
+    text-align: center;
+    font-family: 'Grandstander';
+    background-color: burlywood;
+    border-radius: 15px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.1);
     transition: all 0.3s ease-out;
 }
 
 .modal-win {
     color: green;
+    font-weight: bolder;
 }
 .modal-loss {
     color: red;
+    font-weight: bolder;
 }
 .modal-draw {
     color: black;
+    font-weight: bolder;
 }
 @media (min-width: 600px) {
     .Modal {

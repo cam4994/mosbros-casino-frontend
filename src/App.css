@@ -129,15 +129,26 @@
   font-size: 20px;
   position: fixed;
   z-index: 500;
-  background: white;
   width: 10%;
-  border: 1px solid #ccc;
-  box-shadow: 1px 1px 1px black;
-  padding: 4px;
-  top: 49%;
+  padding: 5px;
+  border-style: solid;
+  border-collapse: collapse;
+  overflow: hidden;
+  text-align: center;
+  font-family: 'Grandstander';
+  background-color: burlywood;
+  border-radius: 15px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.1);
+  top: 48%;
   left: 47.5%;
-  box-sizing: border-box;
   transition: all 0.3s ease-out;
+}
+.home-link a {
+  color:red;
+}
+.home-link a:hover {
+  text-decoration: none;
+  color:white;
 }
 
 .dealer-container {
