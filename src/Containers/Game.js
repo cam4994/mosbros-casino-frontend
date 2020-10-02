@@ -152,9 +152,9 @@ export default class Game extends Component {
   bust = (player) => {
     if (player === "dealer") {
       console.log("dealer busted")
-      this.setState({ bust: player, funds: this.state.funds + (this.state.bet * 2), gameOver: true })
+      this.setState({ bust: player, funds: this.state.funds + (this.state.bet * 2), gameOver: true, showDealerScore: true })
     } else {
-      this.setState({ bust: player, gameOver: true })
+      this.setState({ bust: player, gameOver: true, showDealerScore:true })
     }
 
     setTimeout(() => {
