@@ -360,7 +360,7 @@ export default class Game extends Component {
             <Funds bet={this.state.bet} funds={this.state.funds} addToBet={this.addToBet} clearBet={this.clearBet} startGame={this.startGame} />
           </div>
           <div className="stats-container">
-              {this.state.userCards.length >= 2 && this.state.dealerCards.length >= 2 && this.state.blackjack === '' ? (
+              {this.state.userCards.length >= 2 && this.state.dealerCards.length >= 2 && this.state.blackjack === '' && this.state.bust === '' ? (
                 <Stats userTotal={this.state.userTotal} dealerCard={this.state.dealerCards[1]}/>
               ) : null}
           </div>
