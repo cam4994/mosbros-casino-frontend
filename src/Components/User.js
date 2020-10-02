@@ -39,9 +39,11 @@ class User extends Component {
         return (
             <div className="user">
                 <div className="user-top-container">
+                {this.props.cards.length >1 ? 
                 <div className="user-score">
                     <span className="yellow" data-speed="4" data-color="#ff3">{this.props.total}</span>
-                </div>
+                </div> : null}
+                
                     
 
                     <div className="cards">
