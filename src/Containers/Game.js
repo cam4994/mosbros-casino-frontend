@@ -356,7 +356,7 @@ export default class Game extends Component {
             {this.state.bust === "user" ? (
               <BlackJackModal>
                 <div className='modal-loss'>
-                  OH NO! You went over 21! BUST!
+                  YOU BUSTED!
                 </div>
               </BlackJackModal>
             ) : this.state.bust === "dealer" ? (

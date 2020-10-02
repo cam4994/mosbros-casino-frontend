@@ -52,6 +52,8 @@
   grid-row-start: 1;
   grid-row-end: 4;
   background-image: url(https://www.downtowngrand.com/wp-content/uploads/2018/10/blackjack-1600x891.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 .grid-container > .home-page{
   grid-area: b;
@@ -61,7 +63,7 @@
 .about-page {
   background-color: rgba(255, 255, 255, 0.8);
   width: 850px;
-  height: 680px;
+  height: 800px;
   border-collapse: collapse;
   overflow: hidden;
   text-align: center;
@@ -71,7 +73,7 @@
   margin-top: 2%;
   box-shadow: 0 0 20px rgba(0,0,0,0.1);
   padding: 20px 0;
-  font-size: 22px;
+  font-size: 24px;
   opacity: 1;
 }
 
