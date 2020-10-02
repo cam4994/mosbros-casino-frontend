@@ -64,7 +64,13 @@ class App extends React.Component {
 
   userResponse = (response) => {
     if (response.error) {
-      response.error.forEach(error => console.log(error))
+      let form = document.querySelector('.home-container form')
+      response.error.forEach(error => {
+        let message = document.createElement('p')
+        message.textContent = error 
+        message.classList.add('error-message')
+        form.append(message)
+      })
     } else {
       localStorage.setItem('Token', response.jwt)
       this.setState({ userId: response.user.id })
@@ -77,17 +83,19 @@ class App extends React.Component {
     return (
       <React.Fragment>
         <Router>
-          <NavBar />
+          <NavBar userId={this.state.userId}/>
           <SideBar />
           <Switch>
             <div className="grid-container">
               <Route exact path="/" component={Home} />
               <Route exact path="/about" component={About} />
-              <Route exact path="/login" render={(props) => (
+              <Route exact path="/login" render={(props) => (this.state.userId === 0 ? (
                 <LogIn userCreateOrLogIn={this.userCreateOrLogIn} />
+              ) : <About/>
               )} />
-              <Route exact path="/signup" render={(props) => (
+              <Route exact path="/signup" render={(props) => (this.state.userId === 0 ? (
                 <SignUp userCreateOrLogIn={this.userCreateOrLogIn} />
+              ) : <About/>
               )} />
               <Route exact path="/game" render={(props) => (this.state.gameId === 0 || this.state.userId === 0 ? <LogIn userCreateOrLogIn={this.userCreateOrLogIn} /> : <Game gameId={this.state.gameId} userId={this.state.userId} />
               )} />

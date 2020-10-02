@@ -20,14 +20,18 @@ const Styles = styled.div`
   }
 `;
 
- const NavBar = () => (
+ const NavBar = (props) => (
   <Styles>
     <Navbar expand="lg">
       <Navbar.Brand href="/">Mos Bros Casino</Navbar.Brand>
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="ml-auto">
-          <Nav.Item><Nav.Link as={Link} to="/signup"> Sign Up</Nav.Link></Nav.Item> 
-          <Nav.Item><Nav.Link as={Link} to="/login">Log In</Nav.Link></Nav.Item>
+          {props.userId === 0 ? (
+            <Nav.Item><Nav.Link as={Link} to="/signup"> Sign Up</Nav.Link></Nav.Item> 
+           ) : null}
+           {props.userId === 0 ? (
+            <Nav.Item><Nav.Link as={Link} to="/login">Log In</Nav.Link></Nav.Item>
+           ) : null}
         </Nav>
       </Navbar.Collapse>
     </Navbar>
