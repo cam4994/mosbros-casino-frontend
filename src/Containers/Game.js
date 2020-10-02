@@ -16,7 +16,7 @@ export default class Game extends Component {
     userCards: [],
     dealerTotal: 0,
     userTotal: 0,
-    funds: 100,
+    funds: 0,
     blackjack: "",
     result: ""
   }
@@ -34,6 +34,10 @@ export default class Game extends Component {
       })
     }
     fetch(`http://localhost:3001/games/${this.props.gameId}`, configObj)
+    .then(resp=> resp.json())
+    .then(user=> this.setState({
+      funds: user.funds
+    }))
   }
 
   startGame=()=>{
@@ -57,7 +61,9 @@ export default class Game extends Component {
     }, 1000)
   }
 
-  bet=(amount)=>{
+  addToBet=(amount)=>{
+    console.log("made it to addtoBet")
+    console.log(amount)
     this.setState({
       bet:this.state.bet+amount,
       funds: this.state.funds-amount
@@ -103,6 +109,7 @@ export default class Game extends Component {
   dealerStay = () => {
     if (this.state.userTotal > this.state.dealerTotal) {
       this.setState({ result: "win" })
+      
     } else if (this.state.userTotal < this.state.dealerTotal) {
       this.setState({ result: "loss" })
     } else {
@@ -297,7 +304,7 @@ export default class Game extends Component {
             <User split={this.state.split} userTurn={this.userTurn} cards={this.state.userCards} dealerTurn={this.dealerTurn} total={this.state.userTotal} />
           </div>
           <div className="funds-container">
-            <h1>Hello</h1>
+            <Funds bet={this.state.bet} funds={this.state.funds} addToBet={this.addToBet} clearBet={this.clearBet} startGame={this.startGame} />
           </div>
         </div>
       </div>
