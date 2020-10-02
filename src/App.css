@@ -154,20 +154,33 @@
   margin: auto;
   grid-area: e;
 }
+.inner-funds-container {
 
+}
 .funds-container {
   text-align: center;
-  padding: 20px 0;
+  padding: 5px 5px;
   font-size: 12px;
   grid-area: f;
   margin-right: 30%;
-  margin-top: 20%;
+  margin-left: 0%;
+  margin-top: 15%;
 }
 .funds {
+  padding: 5px;
   border-style: solid;
-  border-color: white;
+  /* border-color: white; */
+  border-collapse: collapse;
+  overflow: hidden;
+  text-align: center;
+  font-family: 'Grandstander';
+  background-color: burlywood;
+  border-radius: 20px;
+  box-shadow: 0 0 20px rgba(0,0,0,0.1);
 }
-
+.bold {
+  font-weight: bolder;
+}
 .stats-container {
   text-align: center;
   font-size: 12px;
@@ -192,8 +205,8 @@
 }
 .user-bottom-container {
   position: absolute;
-  left: 475px;
-  bottom: 80px;
+  left: 520px;
+  bottom: 100px;
 }
 .move {
 
