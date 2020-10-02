@@ -93,6 +93,21 @@
   height: auto;
 }
 
+.home-link {
+  font-size: 20px;
+  position: fixed;
+  z-index: 500;
+  background: white;
+  width: 10%;
+  border: 1px solid #ccc;
+  box-shadow: 1px 1px 1px black;
+  padding: 4px;
+  top: 49%;
+  left: 47.5%;
+  box-sizing: border-box;
+  transition: all 0.3s ease-out;
+}
+
 .dealer-container {
   text-align: center;
   padding: 20px 0;

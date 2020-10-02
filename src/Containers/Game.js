@@ -4,11 +4,12 @@ import User from "../Components/User";
 import Funds from "../Components/Funds";
 import BlackJackModal from "../Components/BlackJackModal";
 import Stats from "../Components/Stats"
+import { NavLink } from 'react-router-dom'
 import '../Styling/blackjackmodal.css'
 
 
 export default class Game extends Component {
-  
+
 
   state = {
     gameOver: false,
@@ -120,14 +121,14 @@ export default class Game extends Component {
 
   dealerStay = () => {
     if (this.state.userTotal > this.state.dealerTotal) {
-      
+
       this.setState({
-        result: "win", funds: this.state.funds + (this.state.bet * 2), gameOver:true
+        result: "win", funds: this.state.funds + (this.state.bet * 2), gameOver: true
       })
     } else if (this.state.userTotal < this.state.dealerTotal) {
-      this.setState({ result: "loss", gameOver:true })
+      this.setState({ result: "loss", gameOver: true })
     } else {
-      this.setState({ result: "push", funds: this.state.funds + this.state.bet, gameOver:true })
+      this.setState({ result: "push", funds: this.state.funds + this.state.bet, gameOver: true })
     }
 
     setTimeout(() => {
@@ -151,9 +152,9 @@ export default class Game extends Component {
   bust = (player) => {
     if (player === "dealer") {
       console.log("dealer busted")
-      this.setState({ bust: player, funds: this.state.funds + (this.state.bet * 2), gameOver:true })
+      this.setState({ bust: player, funds: this.state.funds + (this.state.bet * 2), gameOver: true })
     } else {
-      this.setState({ bust: player, gameOver:true })
+      this.setState({ bust: player, gameOver: true })
     }
 
     setTimeout(() => {
@@ -288,12 +289,12 @@ export default class Game extends Component {
 
   checkForBlackJack = () => {
     if (this.state.userTotal === 21 && this.state.dealerTotal === 21) {
-      this.setState({ result: "push", showDealerScore: true, funds: this.state.funds + this.state.bet, gameOver:true })
+      this.setState({ result: "push", showDealerScore: true, funds: this.state.funds + this.state.bet, gameOver: true })
     } else if (this.state.userTotal === 21) {
-      this.setState({ blackjack: "user", showDealerScore: true, funds: this.state.funds + (this.state.bet * 2.5), gameOver:true })
+      this.setState({ blackjack: "user", showDealerScore: true, funds: this.state.funds + (this.state.bet * 2.5), gameOver: true })
 
     } else if (this.state.dealerTotal === 21) {
-      this.setState({ blackjack: "dealer", showDealerScore: true, gameOver:true })
+      this.setState({ blackjack: "dealer", showDealerScore: true, gameOver: true })
     }
     setTimeout(() => {
 
@@ -309,9 +310,7 @@ export default class Game extends Component {
       }
       fetch(`http://localhost:3001/users/${this.props.userId}`, configObj)
     }, 200)
-
   }
-
 
   render() {
     return (
@@ -367,16 +366,23 @@ export default class Game extends Component {
                 </div>
               </BlackJackModal>
             ) : null}
+            {/* MODAL FOR HOME LINK WHEN GAME ENDS */}
+            {this.state.gameOver ? (
+              <div className="home-link">
+                <NavLink to="/">
+                  Home
+                </NavLink>
+              </div>
+            ) : null}
           </div>
           {this.state.showUser === true ?
             <div className="user-container">
               <User split={this.state.split} userTurn={this.userTurn} cards={this.state.userCards} dealerTurn={this.dealerTurn} total={this.state.userTotal} />
             </div> : null}
-          
-            <div className="funds-container">
-              <Funds bet={this.state.bet} funds={this.state.funds} addToBet={this.addToBet} clearBet={this.clearBet} startGame={this.startGame} gameOver={this.state.gameOver}/>
-              
-            </div> 
+
+          <div className="funds-container">
+            <Funds bet={this.state.bet} funds={this.state.funds} addToBet={this.addToBet} clearBet={this.clearBet} startGame={this.startGame} gameOver={this.state.gameOver} />
+          </div>
 
 
           <div className="stats-container">
