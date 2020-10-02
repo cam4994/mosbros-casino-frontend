@@ -5,7 +5,7 @@ body {
     padding: 0 0 0 0;
   }
   
-  .fancybuttons a, .user-score span, .dealer-score span, .betTotal span, .remainingFunds span {
+  .fancybuttons a, .user-score span, .dealer-score span, .betTotal span, .remainingFunds span, .otherButtons a {
     background: #2c2c2c;
     border: 4px solid transparent;
     box-shadow: 0 0 0 1px #3c3c3c, 0 0 0 2px #000;
@@ -15,7 +15,7 @@ body {
     height: 50px;
     line-height: 50px;
     margin: 0 3px;
-    padding: 0 40px;
+    padding: 0 32px;
     position: relative;
     text-decoration: none;
     text-shadow: 0 -1px 1px #111;
@@ -26,14 +26,9 @@ body {
   .fancybuttons a.red { color: #f33; }
   .fancybuttons a.green { color: #3f3; }
   .fancybuttons a.blue { color: #39f; }
-  .user-score span.yellow, .dealer-score span.yellow { color: #ff3; }
-  
-  // .fancybuttons a canvas {
-  //   display: block;
-  //   opacity: 0;
-  //   position: absolute;
-  // }
-  
+  .user-score span.yellow, .dealer-score span.yellow, .betTotal span.yellow, .remainingFunds span.yellow { color: #ff3; }
+
+
   .fancybuttons a:hover {
     background: #333;
     color: #fff;

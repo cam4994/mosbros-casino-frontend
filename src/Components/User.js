@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Card from "./Card";
-import '../Styling/buttons.scss'
+import '../Styling/buttons.css'
 
 class User extends Component {
 
