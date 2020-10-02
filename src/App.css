@@ -144,7 +144,8 @@
   transition: all 0.3s ease-out;
 }
 .home-link a {
-  color:red;
+  color:black;
+  font-weight: bold;
 }
 .home-link a:hover {
   text-decoration: none;
