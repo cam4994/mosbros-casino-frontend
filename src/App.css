@@ -1,3 +1,35 @@
+
+@import url('https://fonts.googleapis.com/css?family=Montserrat');
+/* body {
+    background-color: #111;
+} */
+
+.home-page {
+    font-family: "Montserrat";
+    text-align: center;
+    color: #FFF;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    letter-spacing: 1px;
+}
+
+.home-title {
+    background-image: url(https://media.giphy.com/media/26BROrSHlmyzzHf3i/giphy.gif);
+    background-size: cover;
+    color: transparent;
+    -moz-background-clip: text;
+    -webkit-background-clip: text;
+    text-transform: uppercase;
+    font-size: 220px;
+    line-height: .75;
+    margin: 10px 0;
+}
+
+
+
 .grid-container {
   display: grid;
   grid-template-areas: 
