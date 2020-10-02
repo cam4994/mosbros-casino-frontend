@@ -30,8 +30,7 @@ const BUSTCHANCE = {
 }
 
 export default class Stats extends Component {
-    render () { console.log("Stats Component")
-        console.log(this.props.userTotal, this.props.dealerTotal)
+    render () { 
         return (
             <div>
 

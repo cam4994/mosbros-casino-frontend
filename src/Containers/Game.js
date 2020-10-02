@@ -9,7 +9,7 @@ import '../Styling/blackjackmodal.css'
 export default class Game extends Component {
 
   state = {
-    bet:0,
+    bet: 0,
     split: false,
     showDealerScore: false,
     bust: "",
@@ -35,13 +35,13 @@ export default class Game extends Component {
       })
     }
     fetch(`http://localhost:3001/games/${this.props.gameId}`, configObj)
-    .then(resp=> resp.json())
-    .then(user=> this.setState({
-      funds: user.funds
-    }))
+      .then(resp => resp.json())
+      .then(user => this.setState({
+        funds: user.funds
+      }))
   }
 
-  startGame=()=>{
+  startGame = () => {
     /* Do initial fetch to get two user cards and two dealer cards */
     setTimeout(() => {
       this.getInitialCard("users")
@@ -62,22 +62,23 @@ export default class Game extends Component {
     }, 1000)
   }
 
-  addToBet=(amount)=>{
+  addToBet = (amount) => {
     console.log("made it to addtoBet")
     console.log(amount)
+    console.log(this.state.funds)
     this.setState({
-      bet:this.state.bet+amount,
-      funds: this.state.funds-amount
+      bet: this.state.bet + amount,
+      funds: this.state.funds - amount
     })
   }
 
-  clearBet=()=>{
+  clearBet = () => {
     this.setState({
-      funds:this.state.funds+this.state.bet
+      funds: this.state.funds + this.state.bet
     })
     setTimeout(() => {
       this.setState({
-        bet:0
+        bet: 0
       })
     }, 300)
   }
@@ -109,17 +110,55 @@ export default class Game extends Component {
 
   dealerStay = () => {
     if (this.state.userTotal > this.state.dealerTotal) {
-      this.setState({ result: "win" })
-      
+      console.log('you win')
+      this.setState({
+        result: "win", funds: this.state.funds + (this.state.bet * 2)
+      })
     } else if (this.state.userTotal < this.state.dealerTotal) {
       this.setState({ result: "loss" })
     } else {
-      this.setState({ result: "push" })
+      this.setState({ result: "push", funds: this.state.funds + this.state.bet })
     }
+
+    setTimeout(() => {
+
+      let configObj = {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json"
+        },
+        body: JSON.stringify({
+          funds: this.state.funds
+        })
+      }
+      fetch(`http://localhost:3001/users/${this.props.userId}`, configObj)
+    }, 200)
+
+    
   }
 
   bust = (player) => {
-    this.setState({ bust: player })
+    if (player==="dealer"){
+      console.log("dealer busted")
+      this.setState({ bust: player, funds: this.state.funds + (this.state.bet * 2) })
+    } else {
+      this.setState({ bust: player })
+    }
+
+    setTimeout(() => {
+      let configObj = {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json"
+        },
+        body: JSON.stringify({
+          funds: this.state.funds
+        })
+      }
+      fetch(`http://localhost:3001/users/${this.props.userId}`, configObj)
+    }, 200)
   }
 
   userTurn = (move) => {
@@ -234,16 +273,29 @@ export default class Game extends Component {
   // }
 
   checkForBlackJack = () => {
-    console.log("Dealer Total", this.state.dealerTotal)
-    console.log("User Total", this.state.userTotal)
     if (this.state.userTotal === 21 && this.state.dealerTotal === 21) {
-      this.setState({ result: "push" })
+      this.setState({ result: "push", showDealerScore: true, funds: this.state.funds + this.state.bet })
     } else if (this.state.userTotal === 21) {
-      this.setState({ blackjack: "user", showDealerScore: true })
+      this.setState({ blackjack: "user", showDealerScore: true, funds: this.state.funds + (this.state.bet * 2) })
 
     } else if (this.state.dealerTotal === 21) {
       this.setState({ blackjack: "dealer", showDealerScore: true })
     }
+    setTimeout(() => {
+
+      let configObj = {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json"
+        },
+        body: JSON.stringify({
+          funds: this.state.funds
+        })
+      }
+      fetch(`http://localhost:3001/users/${this.props.userId}`, configObj)
+    }, 200)
+
   }
 
   render() {
@@ -308,7 +360,7 @@ export default class Game extends Component {
             <Funds bet={this.state.bet} funds={this.state.funds} addToBet={this.addToBet} clearBet={this.clearBet} startGame={this.startGame} />
           </div>
           <div className="stats-container">
-              <Stats userTotal={this.state.userTotal} dealerTotal={this.state.dealerTotal}/>
+            <Stats userTotal={this.state.userTotal} dealerTotal={this.state.dealerTotal} />
           </div>
         </div>
       </div>
