@@ -1,14 +1,14 @@
 .Modal {
     position: fixed;
     z-index: 500;
-    background: rgb(0,0,0);
-    background: linear-gradient(90deg, rgba(0,0,0,1) 0, #434343 100%);
+    background: burlywood;
+    font-size: 22px;
     width: 30%;
-    border: 1px solid #ccc;
+    border: 1px solid rgb(0, 0, 0);
     box-shadow: 1px 1px 1px black;
     padding: 8px;
     left: 15%;
-    top: 40%;
+    top: 37%;
     box-sizing: border-box;
     transition: all 0.3s ease-out;
 }

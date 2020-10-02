@@ -341,7 +341,7 @@ export default class Game extends Component {
               </BlackJackModal>
             ) : this.state.result === "loss" ? (
               <BlackJackModal>
-                <div className='modal-lose'>
+                <div className='modal-loss'>
                   Sorry, the dealer won!
                 </div>
               </BlackJackModal>

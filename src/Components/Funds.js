@@ -7,11 +7,9 @@ class Funds extends Component {
             
             <div className="inner-funds-container">
                 {this.props.gameOver===false ? <div className="funds"> <div className="remainingFunds">
-                    {/* <span className="yellow" data-speed="4" data-color="#ff3">FUNDS: ${this.props.funds}</span> */}
                     <h2>Available Funds: <span className='bold' style={{color: 'green'}}>${this.props.funds}</span></h2>
                 </div>
                 <div className="betTotal">
-                    {/* <span className="yellow" data-speed="4" data-color="#ff3">BET: ${this.props.bet}</span> */}
                     <h3>Bet Amount: <span className='bold' style={{color: 'green'}}>${this.props.bet}</span></h3>
                 </div>
                 <div className="fancybuttons">
