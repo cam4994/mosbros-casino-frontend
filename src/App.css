@@ -119,8 +119,9 @@
   margin: auto;
   grid-area: f;
 }
-.funds-container > h1 {
-  color: white
+
+.stats-container {
+  
 }
 
 .user {
