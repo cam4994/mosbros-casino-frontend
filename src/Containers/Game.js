@@ -287,7 +287,7 @@ export default class Game extends Component {
     if (this.state.userTotal === 21 && this.state.dealerTotal === 21) {
       this.setState({ result: "push", showDealerScore: true, funds: this.state.funds + this.state.bet })
     } else if (this.state.userTotal === 21) {
-      this.setState({ blackjack: "user", showDealerScore: true, funds: this.state.funds + (this.state.bet * 2) })
+      this.setState({ blackjack: "user", showDealerScore: true, funds: this.state.funds + (this.state.bet * 2.5) })
 
     } else if (this.state.dealerTotal === 21) {
       this.setState({ blackjack: "dealer", showDealerScore: true })
