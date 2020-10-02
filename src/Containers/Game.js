@@ -43,34 +43,37 @@ export default class Game extends Component {
 
   startGame = () => {
     /* Do initial fetch to get two user cards and two dealer cards */
-    setTimeout(() => {
-      this.getInitialCard("users")
+    if (this.state.bet > 0) {
       setTimeout(() => {
-        this.getInitialCard("dealers")
+        this.getInitialCard("users")
         setTimeout(() => {
-          this.hit("user")
+          this.getInitialCard("dealers")
           setTimeout(() => {
-            this.hit("dealer")
+            this.hit("user")
             setTimeout(() => {
-              // this.checkForSplit()
-              this.checkForBlackJack()
+              this.hit("dealer")
+              setTimeout(() => {
+                // this.checkForSplit()
+                this.checkForBlackJack()
+              }, 500)
             }, 500)
           }, 500)
         }, 500)
-      }, 500)
 
-    }, 1000)
+      }, 1000)
+    }
+
   }
 
   addToBet = (amount) => {
-    console.log("made it to addtoBet")
-    console.log(amount)
-    console.log(this.state.funds)
-    this.setState({
-      bet: this.state.bet + amount,
-      funds: this.state.funds - amount
-    })
+    if (amount <= this.state.funds) {
+      this.setState({
+        bet: this.state.bet + amount,
+        funds: this.state.funds - amount
+      })
+    }
   }
+
 
   clearBet = () => {
     this.setState({
@@ -135,11 +138,11 @@ export default class Game extends Component {
       fetch(`http://localhost:3001/users/${this.props.userId}`, configObj)
     }, 200)
 
-    
+
   }
 
   bust = (player) => {
-    if (player==="dealer"){
+    if (player === "dealer") {
       console.log("dealer busted")
       this.setState({ bust: player, funds: this.state.funds + (this.state.bet * 2) })
     } else {
@@ -170,6 +173,10 @@ export default class Game extends Component {
         }
       }, 500)
     } else if (move === "double") {
+      this.setState({
+        funds:this.state.funds-this.state.bet,
+        bet:this.state.bet*2
+      })
       this.hit("user")
       setTimeout(() => {
         if (this.state.userTotal > 21) {
@@ -360,9 +367,9 @@ export default class Game extends Component {
             <Funds bet={this.state.bet} funds={this.state.funds} addToBet={this.addToBet} clearBet={this.clearBet} startGame={this.startGame} />
           </div>
           <div className="stats-container">
-              {this.state.userCards.length >= 2 && this.state.dealerCards.length >= 2 && this.state.blackjack === '' ? (
-                <Stats userTotal={this.state.userTotal} dealerCard={this.state.dealerCards[1]}/>
-              ) : null}
+            {this.state.userCards.length >= 2 && this.state.dealerCards.length >= 2 && this.state.blackjack === '' ? (
+              <Stats userTotal={this.state.userTotal} dealerCard={this.state.dealerCards[1]} />
+            ) : null}
           </div>
         </div>
       </div>
