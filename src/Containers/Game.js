@@ -3,6 +3,7 @@ import Dealer from "../Components/Dealer";
 import User from "../Components/User";
 import Funds from "../Components/Funds";
 import BlackJackModal from "../Components/BlackJackModal";
+import Stats from "../Components/Stats"
 import '../Styling/blackjackmodal.css'
 
 export default class Game extends Component {
@@ -305,6 +306,9 @@ export default class Game extends Component {
           </div>
           <div className="funds-container">
             <Funds bet={this.state.bet} funds={this.state.funds} addToBet={this.addToBet} clearBet={this.clearBet} startGame={this.startGame} />
+          </div>
+          <div className="stats-container">
+              <Stats userTotal={this.state.userTotal} dealerTotal={this.state.dealerTotal}/>
           </div>
         </div>
       </div>
