@@ -9,6 +9,7 @@ import '../Styling/blackjackmodal.css'
 export default class Game extends Component {
 
   state = {
+    showUser:false,
     bet: 0,
     split: false,
     showDealerScore: false,
@@ -44,6 +45,9 @@ export default class Game extends Component {
   startGame = () => {
     /* Do initial fetch to get two user cards and two dealer cards */
     if (this.state.bet > 0) {
+      this.setState({
+        showUser:true
+      })
       setTimeout(() => {
         this.getInitialCard("users")
         setTimeout(() => {
@@ -174,8 +178,8 @@ export default class Game extends Component {
       }, 500)
     } else if (move === "double") {
       this.setState({
-        funds:this.state.funds-this.state.bet,
-        bet:this.state.bet*2
+        funds: this.state.funds - this.state.bet,
+        bet: this.state.bet * 2
       })
       this.hit("user")
       setTimeout(() => {
@@ -360,9 +364,11 @@ export default class Game extends Component {
               </BlackJackModal>
             ) : null}
           </div>
-          <div className="user-container">
-            <User split={this.state.split} userTurn={this.userTurn} cards={this.state.userCards} dealerTurn={this.dealerTurn} total={this.state.userTotal} />
-          </div>
+          {this.state.showUser === true ?
+            <div className="user-container">
+              <User split={this.state.split} userTurn={this.userTurn} cards={this.state.userCards} dealerTurn={this.dealerTurn} total={this.state.userTotal} />
+            </div> : null}
+
           <div className="funds-container">
             <Funds bet={this.state.bet} funds={this.state.funds} addToBet={this.addToBet} clearBet={this.clearBet} startGame={this.startGame} />
           </div>
