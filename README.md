@@ -54,8 +54,8 @@ For the Frontend:
 
 
 ## Features
-* Full stack web application utilizing React on the frontend and Rails on the backend.
-* Users can create account through the application.
+* Full stack web application utilizing React on the frontend and Rails on the backend
+* Users can create account through the application
 * Users can increase/decrease their bet amount
 * Users can view the recommended action as well as the user/dealer odds of busting each hand 
 * Users can hit, stay or double 
@@ -66,5 +66,5 @@ Project is completed with the option to expand functionality and DRY out code.
 
 
 ## Contact
-Created by [Colin Mosley](https://www.linkedin.com/in/colin-mosley/) and [Micah Mosley](https://www.linkedin.com/in/micah-mosley-512203128/)
+Created by [Colin Mosley](https://www.linkedin.com/in/colin-mosley/) and [Micah Mosley](https://www.linkedin.com/in/micah-mosley-512203128/).
 Please contact one of us if you have any questions. 
